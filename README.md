@@ -2,9 +2,9 @@
 
 This a project that is designing to be a enterprise resource planing (ERP) program.
 
-Project Chino will start base on a server I developed droning 2018 summer. This is simple program with integrated GUI and serve. Our goal is to take features of that and build a new system software that allows us to separation server-client and other components.
+Project Cirno will start base on a server I developed droning 2018 summer. This is simple program with integrated GUI and serve. Our goal is to take features of that and build a new system software that allows us to separation server-client and other components.
 
-Project Chino is the main server of this system. With the following main feature:
+Project Cirno is the main server of this system. With the following main feature:
 1. Make servals available for client 24/7
 2. Act as the only client for database
 3. Handling request and exchange data as a middle man between database and client
@@ -46,7 +46,7 @@ Phase 2:
 Phase 3:
 1. Implement each feature and debug
 
-# Project Chino - public ProjectChino()
+# Project Cirno - public ProjectCirno()
 
 Please read and follow Google’s java style guide.
 

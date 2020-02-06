@@ -5,7 +5,7 @@ This a project that is designing to be a enterprise resource planing (ERP) progr
 Project Cirno will start base on a server I developed droning 2018 summer. This is simple program with integrated GUI and serve. Our goal is to take features of that and build a new system software that allows us to separation server-client and other components.
 
 Project Cirno is the main server of this system. With the following main feature:
-1. Make servals available for client 24/7
+1. Make server available for client 24/7
 2. Act as the only client for database
 3. Handling request and exchange data as a middle man between database and client
 4. Have all the feature that ready to go and is cable to expect new features

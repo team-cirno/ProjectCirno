@@ -3,11 +3,9 @@
 This a project that is designing to be a backend for a video hosting site.
 
 Project Cirno is the main server of this system. With the following main feature:
-1. Make server available for client 24/7
-2. Act as the only client for database
-3. Handling request and exchange data as a middle man between database and client
-4. Have all the feature that ready to go and is cable to expect new features
-5. Strictly following java OOP style
+1. Provide verification services
+2. Provide resources
+3. Accept transaction
 
 The project will be separate as the following parts:
 1. Server building and maintenance

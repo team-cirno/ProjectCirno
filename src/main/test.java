@@ -1,15 +1,23 @@
 package main;
 
 
+import javax.net.ssl.KeyManager;
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.security.KeyStore;
+import java.security.*;
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import java.security.interfaces.RSAPrivateKey;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.PKCS8EncodedKeySpec;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
@@ -18,8 +26,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class test {
-
-
     public static void main(String... args) {
         var address = new InetSocketAddress("10.0.0.61", 8443);
 
@@ -32,7 +38,7 @@ public class test {
 
         try (var serverSocket = getServerSocket(address)) {
 
-            Charset encoding = StandardCharsets.UTF_8;
+            var encoding = StandardCharsets.UTF_8;
 
             // This infinite loop is not CPU-intensive since method "accept" blocks
             // until a client has made a connection to the socket
@@ -69,7 +75,7 @@ public class test {
         // 0 means that an implementation-specific default is used
         int backlog = 0;
 
-        Path keyStorePath = Path.of("./keystore.jks");
+        var keyStorePath = Path.of("./keystore.jks");
         char[] keyStorePassword = "pass_for_self_signed_cert".toCharArray();
 
         // Bind the socket to the given port and address
@@ -86,7 +92,7 @@ public class test {
     private static SSLContext getSslContext(Path keyStorePath, char[] keyStorePass)
             throws Exception {
 
-        var keyStore = KeyStore.getInstance("JKS");
+        var keyStore = KeyStore.getInstance("PEM");
         keyStore.load(new FileInputStream(keyStorePath.toFile()), keyStorePass);
 
         var keyManagerFactory = KeyManagerFactory.getInstance("SunX509");
@@ -178,4 +184,5 @@ public class test {
                 60L, TimeUnit.SECONDS,
                 new SynchronousQueue<>());
     }
+
 }

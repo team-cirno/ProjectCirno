@@ -20,6 +20,8 @@ public class HttpHandler {
 
     public HttpHandler(){
 
+        Logger("Creating HTTP hander");
+
     }
 
 

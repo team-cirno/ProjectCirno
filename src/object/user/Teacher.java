@@ -1,4 +1,4 @@
-package Object.User;
+package object.user;
 
 public class Teacher {
 }

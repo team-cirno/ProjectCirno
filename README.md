@@ -3,9 +3,10 @@
 This a project that is designing to be a backend for a video hosting site.
 
 Project Cirno is the main server of this system. With the following main feature:
-1. Provide verification services
+1. Provide verification services with OAUTH
 2. Provide resources
 3. Accept transaction
+4. Handels http request only
 
 The project will be separate as the following parts:
 1. Server building and maintenance

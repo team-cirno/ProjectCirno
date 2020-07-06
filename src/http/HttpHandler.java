@@ -50,7 +50,9 @@ public class HttpHandler {
                              socket.getOutputStream(), encoding.name()))
                 ) {
                     getHeaderLines(reader).forEach(System.out::println);
-
+                    //auth
+                    //handel request
+                    //give feed back
                     writer.write(getResponse(encoding));
                     writer.flush();
 
@@ -70,7 +72,7 @@ public class HttpHandler {
 
         // Backlog is the maximum number of pending connections on the socket,
         // 0 means that an implementation-specific default is used
-             int backlog = 0;
+        int backlog = 0;
 
         var keyStorePath = Path.of("./keystore.jks");
         char[] keyStorePassword = "pass_for_self_signed_cert".toCharArray();

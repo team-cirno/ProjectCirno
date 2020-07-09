@@ -18,17 +18,16 @@ import java.util.concurrent.TimeUnit;
 
 public class HttpHandler {
 
-    public HttpHandler(){
-
-        Logger("Creating HTTP hander");
-
+    public HttpHandler(String address, int port){
+        //Logger("Creating HTTP hander");
+        var Address = new InetSocketAddress(address, port);
     }
 
 
     public static void main(String... args) {
-        var address = new InetSocketAddress("10.0.0.61", 8443);
+        var Address = new InetSocketAddress("10.0.0.16", 8080);
 
-        startSingleThreaded(address);
+        startMultiThreaded(Address);
     }
 
     public static void startSingleThreaded(InetSocketAddress address) {
@@ -65,6 +64,7 @@ public class HttpHandler {
             }
         } catch (Exception e) {
             System.err.println("Could not create socket at " + address);
+            //Logger("Error try failed");
             e.printStackTrace();
         }
     }
@@ -72,12 +72,14 @@ public class HttpHandler {
     private static ServerSocket getServerSocket(InetSocketAddress address)
             throws Exception {
 
+        return new ServerSocket(8080);
+        /*
         // Backlog is the maximum number of pending connections on the socket,
         // 0 means that an implementation-specific default is used
         int backlog = 0;
 
-        var keyStorePath = Path.of("./keystore.jks");
-        char[] keyStorePassword = "pass_for_self_signed_cert".toCharArray();
+        var keyStorePath = Path.of("./etc/letsencrypt/live/nekohub.me/fullchain.pem");
+        char[] keyStorePassword = "Nekohub!".toCharArray();
 
         // Bind the socket to the given port and address
         var serverSocket = getSslContext(keyStorePath, keyStorePassword)
@@ -88,6 +90,8 @@ public class HttpHandler {
         Arrays.fill(keyStorePassword, '0');
 
         return serverSocket;
+
+        */
     }
 
     private static SSLContext getSslContext(Path keyStorePath, char[] keyStorePass)

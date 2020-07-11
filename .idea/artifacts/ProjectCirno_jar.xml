@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ProjectCirno:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ProjectCirno_jar</output-path>
+    <root id="archive" name="ProjectCirno.jar">
+      <element id="module-output" name="ProjectCirno" />
+    </root>
+  </artifact>
+</component>

@@ -1,5 +1,7 @@
 package http;
 
+import logger.Logger;
+
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import java.io.*;
@@ -18,55 +20,19 @@ import java.util.concurrent.TimeUnit;
 
 public class HttpHandler {
 
+    public static Logger logger;
+
     public HttpHandler(String address, int port){
-        //Logger("Creating HTTP hander");
+        logger = new Logger(this);
+        logger.log("Creating HTTP hander");
         var Address = new InetSocketAddress(address, port);
     }
 
 
     public static void main(String... args) {
         var Address = new InetSocketAddress("10.0.0.90", 2048);
-
+        HttpHandler tmp = new HttpHandler("nekohub.me",2048);
         startMultiThreaded(Address);
-    }
-
-    public static void startSingleThreaded(InetSocketAddress address) {
-
-        System.out.println("Start single-threaded server at " + address);
-
-        try (var serverSocket = getServerSocket(address)) {
-
-            var encoding = StandardCharsets.UTF_8;
-
-            // This infinite loop is not CPU-intensive since method "accept" blocks
-            // until a client has made a connection to the socket
-            while (true) {
-                try (var socket = serverSocket.accept();
-                     // Use the socket to read the client's request
-                     var reader = new BufferedReader(new InputStreamReader(
-                             socket.getInputStream(), encoding.name()));
-                     // Writing to the output stream and then closing it sends
-                     // data to the client
-                     var writer = new BufferedWriter(new OutputStreamWriter(
-                             socket.getOutputStream(), encoding.name()))
-                ) {
-                    getHeaderLines(reader).forEach(System.out::println);
-                    //auth
-                    //handel request
-                    //give feed back
-                    writer.write(getResponse(encoding));
-                    writer.flush();
-
-                } catch (IOException e) {
-                    System.err.println("Exception while handling connection");
-                    e.printStackTrace();
-                }
-            }
-        } catch (Exception e) {
-            System.err.println("Could not create socket at " + address);
-            //Logger("Error try failed");
-            e.printStackTrace();
-        }
     }
 
     private static ServerSocket getServerSocket(InetSocketAddress address)
@@ -163,6 +129,9 @@ public class HttpHandler {
                                       socket.getOutputStream(), encoding.name()))
                         ) {
                             getHeaderLines(reader).forEach(System.out::println);
+                            //Auth
+                            //Do Stuff
+                            //get response
                             writer.write(getResponse(encoding));
                             writer.flush();
                             // We're done with the connection → Close the socket

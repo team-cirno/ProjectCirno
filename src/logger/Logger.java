@@ -1,4 +1,4 @@
-package Logger;
+package logger;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,6 +17,7 @@ public class Logger {
 
     public static void log(String logEntry){
         String time = new Timestamp(System.currentTimeMillis()).toString();
+        System.out.println(time+"\t"+curClass+"\t"+logEntry);
         exportLog(time+"\t"+curClass+"\t"+logEntry);
     }
 

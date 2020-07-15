@@ -30,7 +30,7 @@ public class HttpHandler {
 
 
     public static void main(String... args) {
-        var Address = new InetSocketAddress("10.0.0.90", 2048);
+        var Address = new InetSocketAddress("10.0.0.16", 2048);
         HttpHandler tmp = new HttpHandler("nekohub.me",2048);
         startMultiThreaded(Address);
     }
@@ -38,13 +38,13 @@ public class HttpHandler {
     private static ServerSocket getServerSocket(InetSocketAddress address)
             throws Exception {
 
-        return new ServerSocket(2048);
-        /*
+        //return new ServerSocket(2048);
+
         // Backlog is the maximum number of pending connections on the socket,
         // 0 means that an implementation-specific default is used
         int backlog = 0;
 
-        var keyStorePath = Path.of("./etc/letsencrypt/live/nekohub.me/fullchain.pem");
+        var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
         char[] keyStorePassword = "Nekohub!".toCharArray();
 
         // Bind the socket to the given port and address
@@ -57,13 +57,13 @@ public class HttpHandler {
 
         return serverSocket;
 
-        */
+
     }
 
     private static SSLContext getSslContext(Path keyStorePath, char[] keyStorePass)
             throws Exception {
 
-        var keyStore = KeyStore.getInstance("PEM");
+        var keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
         keyStore.load(new FileInputStream(keyStorePath.toFile()), keyStorePass);
 
         var keyManagerFactory = KeyManagerFactory.getInstance("SunX509");

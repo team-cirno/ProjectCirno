@@ -5,3 +5,6 @@ out/production/ProjectCirno/main/test.class
 *.xml
 *.class
 logger.txt
+*.jar
+*.MF
+*.class

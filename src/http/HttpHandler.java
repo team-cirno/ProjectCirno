@@ -80,6 +80,11 @@ public class HttpHandler {
         var contentLength = body.getBytes(encoding).length;
 
         return "HTTP/1.1 200 OK\r\n" +
+                String.format("Access-Control-Allow-Origin: *\r\n") +
+                String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
+                String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
+                String.format("Access-Control-Allow-Credentials: false\r\n") +
+                String.format("Access-Control-Max-Age: 3600\r\n") +
                 String.format("Content-Length: %d\r\n", contentLength) +
                 String.format("Content-Type: text/plain; charset=%s\r\n",
                         encoding.displayName()) +

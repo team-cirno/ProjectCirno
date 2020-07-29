@@ -117,7 +117,7 @@ public class HttpHandler implements Runnable{
 
         try (var serverSocket = getServerSocket(address)) {
 
-            System.out.println("Started multi-threaded server at " + address);
+            logger.log("Started multi-threaded server at " + address);
 
             // A cached thread pool with a limited number of threads
             var threadPool = newCachedThreadPool(8);

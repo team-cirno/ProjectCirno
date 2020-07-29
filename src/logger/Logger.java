@@ -19,7 +19,8 @@ public class Logger {
 
     public static synchronized void log(String logEntry){
         String time = new Timestamp(System.currentTimeMillis()).toString();
-        logSet.add(time+"\t"+curClass+"\t"+logEntry);
+        System.out.print("["+time+"]\t"+curClass+"\t-"+logEntry+"\r\n");
+        logSet.add("["+time+"]\t"+curClass+"\t-"+logEntry+"\r\n");
     }
 
     public static synchronized void serverStat(String userIP, String userIdentifier, String userId, String requestLine, String statusCode, String returnSize, String errorMessage){

@@ -1,1 +1,15 @@
-2020-07-14 06:40:32.654	HttpHandler	Creating HTTP hander2020-07-14 06:41:12.519	HttpHandler	Creating HTTP hander2020-07-14 08:30:10.796	HttpHandler	Creating HTTP hander2020-07-15 10:42:18.717	HttpHandler	Creating HTTP hander
+[2020-07-30 06:19:22.269]	ServerLauncher	-Starting Launch Process...
+[2020-07-30 06:19:22.291]	ServerMain	-Creating Server Main
+[2020-07-30 06:19:22.299]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-30 06:19:22.299]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-30 06:19:22.299]	HttpHandler	-HTTP success
+[2020-07-30 06:19:22.299]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-30 06:19:22.301]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-30 06:19:22.301]	ServerMain	-HttpHandler running...
+[2020-07-30 06:19:22.301]	HttpHandler	-HttpHandler run...
+[2020-07-30 06:19:22.302]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-30 06:19:22.302]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-30 06:19:32.316]	ServerMain	-Still waiting
+[2020-07-30 06:19:32.316]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-30 06:19:32.316]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-30 06:19:32.317]	HttpHandler	-Find server closed

@@ -19,8 +19,8 @@ public class Logger {
 
     public synchronized void log(String logEntry){
         String time = new Timestamp(System.currentTimeMillis()).toString();
-        System.out.print("["+time+"]\t"+curClass+"\t-"+logEntry+"\r\n");
-        logSet.add("["+time+"]\t"+curClass+"\t-"+logEntry+"\r\n");
+        System.out.println("["+time+"]\t"+curClass+"\t-"+logEntry);
+        logSet.add("["+time+"]\t"+curClass+"\t-"+logEntry);
     }
 
     public static synchronized void serverStat(String userIP, String userIdentifier, String userId, String requestLine, String statusCode, String returnSize, String errorMessage){
@@ -46,7 +46,7 @@ public class Logger {
         }
     }
 
-    public static synchronized void exportLog(ArrayList<String> logSet){
+    public static synchronized void exportLog(){
         //export info to the log file when server stopped
         try{
             BufferedWriter logWriter = new BufferedWriter(new FileWriter("./logger.txt",true));

@@ -24,7 +24,12 @@ public class HttpHandler implements Runnable{
 
     public InetSocketAddress Address;
 
+    static String address;
+    static int port;
+
     public HttpHandler(String address, int port){
+        this.address = address;
+        this.port = port;
         logger = new Logger(this);
         logger.log("Creating HTTP hander "+
                 String.format("Address: %s | ", address)+
@@ -45,13 +50,15 @@ public class HttpHandler implements Runnable{
         int https = 0;
 
         if(https == 0){
+            logger.log("Get HTTP ServerSocket");
+            logger.log("HTTP success");
             return new ServerSocket(2048);
         }
-
+        logger.log("Get HTTPs ServerSocket");
         // Backlog is the maximum number of pending connections on the socket,
         // 0 means that an implementation-specific default is used
         int backlog = 0;
-
+        logger.log("Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore");
         var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
         char[] keyStorePassword = "Nekohub!".toCharArray();
 
@@ -62,7 +69,7 @@ public class HttpHandler implements Runnable{
 
         // We don't need the password anymore → Overwrite it
         Arrays.fill(keyStorePassword, '0');
-
+        logger.log("HTTPs success");
         return serverSocket;
 
 
@@ -114,16 +121,18 @@ public class HttpHandler implements Runnable{
     }
 
     public static void startMultiThreaded(InetSocketAddress address) {
+        logger.log("Starting multi-threaded server at " + address);
 
         try (var serverSocket = getServerSocket(address)) {
 
-            logger.log("Started multi-threaded server at " + address);
 
             // A cached thread pool with a limited number of threads
             var threadPool = newCachedThreadPool(8);
 
             var encoding = StandardCharsets.UTF_8;
-
+            logger.log("Listening at address:" +
+                    String.format("Address: %s | ", address)+
+                    String.format("Port: %d", port));
             // This infinite loop is not CPU-intensive since method "accept" blocks
             // until a client has made a connection to the socket
             while (true) {
@@ -141,7 +150,8 @@ public class HttpHandler implements Runnable{
                               var writer = new BufferedWriter(new OutputStreamWriter(
                                       socket.getOutputStream(), encoding.name()))
                         ) {
-                            getHeaderLines(reader).forEach(System.out::println);
+                            logger.log("From: "+socket.getInetAddress().toString()+" | "+getHeaderLines(reader).toString());
+                            //getHeaderLines(reader).forEach(System.out::println);
                             //Auth
                             //Do Stuff
                             //get response

@@ -18,20 +18,24 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class HttpHandler {
+public class HttpHandler implements Runnable{
 
     public static Logger logger;
 
+    public InetSocketAddress Address;
+
     public HttpHandler(String address, int port){
         logger = new Logger(this);
-        logger.log("Creating HTTP hander");
-        var Address = new InetSocketAddress(address, port);
+        logger.log("Creating HTTP hander "+
+                String.format("Address: %s | ", address)+
+                String.format("Port: %d", port));
+        Address = new InetSocketAddress(address,port);
+
     }
 
 
-    public static void main(String... args) {
-        var Address = new InetSocketAddress("192.168.0.x", 2048);
-        HttpHandler tmp = new HttpHandler("nekohub.me",2048);
+    @Override
+    public void run() {
         startMultiThreaded(Address);
     }
 
@@ -167,4 +171,5 @@ public class HttpHandler {
                 60L, TimeUnit.SECONDS,
                 new SynchronousQueue<>());
     }
+
 }

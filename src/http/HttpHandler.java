@@ -7,6 +7,7 @@ import javax.net.ssl.SSLContext;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -184,12 +185,11 @@ public class HttpHandler implements Runnable{
                         if (serverSocket!=null&&serverSocket.isClosed()==false) {
                             try {
                                 serverSocket.close();
-                            } catch (IOException e) {
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
-
-                        return;
+                        break;
                     }
                     var socket = serverSocket.accept();
 
@@ -221,6 +221,8 @@ public class HttpHandler implements Runnable{
                         }
                     });
                 } catch (SocketTimeoutException e) {
+
+                } catch (SocketException e) {
 
                 } catch (IOException e) {
                     System.err.println("Exception while handling connection");

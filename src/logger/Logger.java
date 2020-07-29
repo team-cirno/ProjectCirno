@@ -7,7 +7,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Logger {
-    private static String curClass = null;
+    private String curClass = null;
     private static ArrayList<String> logSet = new ArrayList<>();
     private static  ArrayList<String > serverStat = new ArrayList<>();
     private static int requestCount = 0;
@@ -17,7 +17,7 @@ public class Logger {
         this.curClass=obj.getClass().getSimpleName();
     }
 
-    public static synchronized void log(String logEntry){
+    public synchronized void log(String logEntry){
         String time = new Timestamp(System.currentTimeMillis()).toString();
         System.out.print("["+time+"]\t"+curClass+"\t-"+logEntry+"\r\n");
         logSet.add("["+time+"]\t"+curClass+"\t-"+logEntry+"\r\n");

@@ -7,6 +7,7 @@ import javax.net.ssl.SSLContext;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
+import java.net.SocketTimeoutException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -23,9 +24,15 @@ public class HttpHandler implements Runnable{
     public static Logger logger;
 
     public InetSocketAddress Address;
+    public static ServerSocket serverSocket;
+    ExecutorService threadPool;
+
+    private Thread t;
+    private String threadName;
 
     static String address;
     static int port;
+    boolean isLive = false;
 
     public HttpHandler(String address, int port){
         this.address = address;
@@ -35,16 +42,52 @@ public class HttpHandler implements Runnable{
                 String.format("Address: %s | ", address)+
                 String.format("Port: %d", port));
         Address = new InetSocketAddress(address,port);
-
+        try{
+            serverSocket = getServerSocket(Address);
+            serverSocket.setSoTimeout(2000);
+        } catch (Exception e) {
+            System.err.println("Could not create socket at " + address);
+            e.printStackTrace();
+        }
+        logger.log("Creating ThreadPool with cap of 8");
+        threadPool = newCachedThreadPool(8);
+        threadName = "HttpHandler";
     }
 
 
     @Override
     public void run() {
+        isLive = true;
+        logger.log("HttpHandler run...");
         startMultiThreaded(Address);
     }
 
-    private static ServerSocket getServerSocket(InetSocketAddress address)
+    public void start() {
+        logger.log("Starting Thread - " +  threadName );
+        if (t == null) {
+            t = new Thread (this, threadName);
+            t.start ();
+        }
+    }
+
+    public void stop() {
+        logger.log("Shutting Down HttpHandler...");
+        isLive = false;
+
+        if (serverSocket!=null&&serverSocket.isClosed()==false) {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        logger.log("Shutting Down HttpHandler... Done.");
+
+    }
+
+
+    public ServerSocket getServerSocket(InetSocketAddress address)
             throws Exception {
 
         int https = 0;
@@ -75,7 +118,7 @@ public class HttpHandler implements Runnable{
 
     }
 
-    private static SSLContext getSslContext(Path keyStorePath, char[] keyStorePass)
+    private SSLContext getSslContext(Path keyStorePath, char[] keyStorePass)
             throws Exception {
 
         var keyStore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -90,7 +133,7 @@ public class HttpHandler implements Runnable{
         return sslContext;
     }
 
-    private static String getResponse(Charset encoding) {
+    private String getResponse(Charset encoding) {
         var body = "The server says hi 👋\r\n";
         var contentLength = body.getBytes(encoding).length;
 
@@ -108,7 +151,7 @@ public class HttpHandler implements Runnable{
                 body;
     }
 
-    private static ArrayList<String> getHeaderLines(BufferedReader reader)
+    private ArrayList<String> getHeaderLines(BufferedReader reader)
             throws IOException {
         var lines = new ArrayList<String>();
         var line = reader.readLine();
@@ -120,14 +163,13 @@ public class HttpHandler implements Runnable{
         return lines;
     }
 
-    public static void startMultiThreaded(InetSocketAddress address) {
+    public void startMultiThreaded(InetSocketAddress address) {
         logger.log("Starting multi-threaded server at " + address);
 
-        try (var serverSocket = getServerSocket(address)) {
+
 
 
             // A cached thread pool with a limited number of threads
-            var threadPool = newCachedThreadPool(8);
 
             var encoding = StandardCharsets.UTF_8;
             logger.log("Listening at address:" +
@@ -137,7 +179,20 @@ public class HttpHandler implements Runnable{
             // until a client has made a connection to the socket
             while (true) {
                 try {
+                    if(!isLive){
+                        logger.log("Find server closed");
+                        if (serverSocket!=null&&serverSocket.isClosed()==false) {
+                            try {
+                                serverSocket.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        return;
+                    }
                     var socket = serverSocket.accept();
+
                     // Create a response to the request on a separate thread to
                     // handle multiple requests simultaneously
                     threadPool.submit(() -> {
@@ -165,21 +220,22 @@ public class HttpHandler implements Runnable{
                             e.printStackTrace();
                         }
                     });
+                } catch (SocketTimeoutException e) {
+
                 } catch (IOException e) {
                     System.err.println("Exception while handling connection");
                     e.printStackTrace();
                 }
             }
-        } catch (Exception e) {
-            System.err.println("Could not create socket at " + address);
-            e.printStackTrace();
-        }
+
     }
 
-    private static ExecutorService newCachedThreadPool(int maximumNumberOfThreads) {
+    private ExecutorService newCachedThreadPool(int maximumNumberOfThreads) {
         return new ThreadPoolExecutor(0, maximumNumberOfThreads,
                 60L, TimeUnit.SECONDS,
                 new SynchronousQueue<>());
     }
+
+
 
 }

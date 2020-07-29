@@ -15,5 +15,7 @@ public class ServerLauncher {
         logger.log("Starting Launch Process...");
         var server = new ServerMain();
         server.init();
+        logger.log("Starting Launch Process Done.");
+
     }
 }

@@ -20,11 +20,20 @@ public class ServerMain {
 
     public int init(){
         //load history and database
-        httpHandler.run();
+        httpHandler.start();
+        logger.log("HttpHandler running...");
+
+        try {
+            TimeUnit.SECONDS.sleep(10);
+            logger.log("Still waiting");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        httpHandler.stop();
         while(true){
             try {
                 TimeUnit.SECONDS.sleep(1);
-                logger.log("Still runing");
+                logger.log("Still waiting");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

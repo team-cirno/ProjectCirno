@@ -248,11 +248,10 @@ public class HttpHandler implements Runnable{
 
                         try ( // Use the socket to read the client's request
                               var reader = new BufferedReader(new InputStreamReader(
-                                      socket.getInputStream(), encoding.name()));
+                                      socket.getInputStream()));
                         // Writing to the output stream and then closing it
                               // sends data to the client
-                              var writer = new BufferedWriter(new OutputStreamWriter(
-                                      socket.getOutputStream(), encoding.name()))
+                              var writer = socket.getOutputStream();
                         ) {
                             ArrayList<String> header;
                             header = getHeaderLines(reader);
@@ -261,9 +260,15 @@ public class HttpHandler implements Runnable{
                             //Auth
                             //Do Stuff
                             //get response
-                            writer.write(getResponse(encoding,header.get(0)));
+                            HttpResponse res = HttpConstructor.getImage();
+                            writer.write(res.getHead().getBytes(),0,res.getHead().getBytes().length);
                             writer.flush();
+                            writer.write(res.getPayload(),0,res.getPayload().length);
+                            writer.flush();
+
                             // We're done with the connection → Close the socket
+                            writer.close();
+                            reader.close();
                             socket.close();
 
                         } catch (Exception e) {

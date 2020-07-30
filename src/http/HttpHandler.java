@@ -134,9 +134,59 @@ public class HttpHandler implements Runnable{
         return sslContext;
     }
 
-    private String getResponse(Charset encoding) {
-        var body = "The server says hi 👋\r\n";
-        var contentLength = body.getBytes(encoding).length;
+    private String getResponse(Charset encoding,String requestUrl) {
+//        ---------------------
+        String contentType = "text/plain";
+//        var body = "The server says hi 👋\r\n";
+//        var contentLength = ((String) body).getBytes(encoding).length;
+        Object body;
+        int contentLength;
+
+        if(requestUrl.equals("GET /auth HTTP/1.1")){
+            body = "random auth";
+            contentLength = ((String) body).getBytes(encoding).length;
+        }else if(requestUrl.equals("GET /file HTTP/1.1")){
+            File testFile = new File("./test_video.mp4");
+            byte[] byteArray = new byte[(int) testFile.length()];
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(testFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            try {
+                bis.read(byteArray,0,byteArray.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            body = byteArray;
+            contentLength = byteArray.length;
+            contentType = "video/mpeg4";
+        }else if(requestUrl.equals("GET /image HTTP/1.1")){
+            File testImage = new File("./test_image.jpg");
+            byte[] byteArray = new byte[(int) testImage.length()];
+            FileInputStream fis = null;
+            try {
+                fis = new FileInputStream(testImage);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            try {
+                bis.read(byteArray,0,byteArray.length);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            body = byteArray;
+            contentLength = byteArray.length;
+            contentType = "image/jpeg";
+        }else{
+            body = "The server says hi 👋\r\n";
+            contentLength = ((String) body).getBytes(encoding).length;
+        }
+
+//        ---------------------
 
         return "HTTP/1.1 200 OK\r\n" +
                 String.format("Access-Control-Allow-Origin: *\r\n") +
@@ -145,15 +195,14 @@ public class HttpHandler implements Runnable{
                 String.format("Access-Control-Allow-Credentials: false\r\n") +
                 String.format("Access-Control-Max-Age: 3600\r\n") +
                 String.format("Content-Length: %d\r\n", contentLength) +
-                String.format("Content-Type: text/plain; charset=%s\r\n",
-                        encoding.displayName()) +
+                String.format("Content-Type: %s; charset=%s\r\n",
+                        contentType,encoding.displayName()) +
                 // An empty line marks the end of the response's header
                 "\r\n" +
                 body;
     }
 
-    private ArrayList<String> getHeaderLines(BufferedReader reader)
-            throws IOException {
+    private ArrayList<String> getHeaderLines(BufferedReader reader) throws IOException {
         var lines = new ArrayList<String>();
         var line = reader.readLine();
         // An empty line marks the end of the request's header
@@ -200,17 +249,19 @@ public class HttpHandler implements Runnable{
                         try ( // Use the socket to read the client's request
                               var reader = new BufferedReader(new InputStreamReader(
                                       socket.getInputStream(), encoding.name()));
-                              // Writing to the output stream and then closing it
+                        // Writing to the output stream and then closing it
                               // sends data to the client
                               var writer = new BufferedWriter(new OutputStreamWriter(
                                       socket.getOutputStream(), encoding.name()))
                         ) {
-                            logger.log("From: "+socket.getInetAddress().toString()+" | "+getHeaderLines(reader).toString());
+                            ArrayList<String> header;
+                            header = getHeaderLines(reader);
+                            logger.log("From: "+socket.getInetAddress().toString()+" | "+header.toString());
                             //getHeaderLines(reader).forEach(System.out::println);
                             //Auth
                             //Do Stuff
                             //get response
-                            writer.write(getResponse(encoding));
+                            writer.write(getResponse(encoding,header.get(0)));
                             writer.flush();
                             // We're done with the connection → Close the socket
                             socket.close();

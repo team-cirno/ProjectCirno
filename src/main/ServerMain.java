@@ -31,16 +31,9 @@ public class ServerMain {
             e.printStackTrace();
         }
         httpHandler.stop();
-        ArrayList<String> cars = new ArrayList<String>();
-        cars.add("Volvo");
-        cars.add("BMW");
-        cars.add("Ford");
-        cars.add("Mazda");
-        Logger.exportServerStat(cars);
+
         Logger.exportLog();
         return 0;
     }
-
-
 
 }

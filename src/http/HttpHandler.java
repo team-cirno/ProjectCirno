@@ -24,14 +24,14 @@ public class HttpHandler implements Runnable{
     public static Logger logger;
 
     public InetSocketAddress Address;
-    public static ServerSocket serverSocket;
+    public ServerSocket serverSocket;
     ExecutorService threadPool;
 
     private Thread t;
-    private String threadName;
+    private final String threadName = "HttpHandler";
 
-    static String address;
-    static int port;
+    String address;
+    int port;
     boolean isLive = false;
 
     public HttpHandler(String address, int port){
@@ -51,7 +51,6 @@ public class HttpHandler implements Runnable{
         }
         logger.log("Creating ThreadPool with cap of 8");
         threadPool = newCachedThreadPool(8);
-        threadName = "HttpHandler";
     }
 
 
@@ -74,7 +73,7 @@ public class HttpHandler implements Runnable{
         logger.log("Shutting Down HttpHandler...");
         isLive = false;
 
-        if (serverSocket!=null&&serverSocket.isClosed()==false) {
+        if (serverSocket!=null&& !serverSocket.isClosed()) {
             try {
                 serverSocket.close();
             } catch (IOException e) {
@@ -162,7 +161,7 @@ public class HttpHandler implements Runnable{
                 try {
                     if(!isLive){
                         logger.log("Find server closed");
-                        if (serverSocket!=null&&serverSocket.isClosed()==false) {
+                        if (serverSocket!=null&& !serverSocket.isClosed()) {
                             try {
                                 serverSocket.close();
                             } catch (Exception e) {
@@ -207,9 +206,7 @@ public class HttpHandler implements Runnable{
                             e.printStackTrace();
                         }
                     });
-                } catch (SocketTimeoutException e) {
-
-                } catch (SocketException e) {
+                } catch (SocketTimeoutException | SocketException ignored) {
 
                 } catch (IOException e) {
                     System.err.println("Exception while handling connection");

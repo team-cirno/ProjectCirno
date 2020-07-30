@@ -2,13 +2,15 @@ package http;
 
 import java.io.*;
 
+import static java.lang.String.format;
+
 public class HttpConstructor {
 
-    public static String AccessControl = String.format("Access-Control-Allow-Origin: *\r\n") +
-            String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
-            String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
-            String.format("Access-Control-Allow-Credentials: false\r\n") +
-            String.format("Access-Control-Max-Age: 3600\r\n");
+    public static String AccessControl = "Access-Control-Allow-Origin: *\r\n" +
+            "Access-Control-Allow-Methods: GET, OPTIONS\r\n" +
+            "Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n" +
+            "Access-Control-Allow-Credentials: false\r\n" +
+            "Access-Control-Max-Age: 3600\r\n";
 
     public static Http getDefault(){
 
@@ -17,8 +19,8 @@ public class HttpConstructor {
 
         String head = "HTTP/1.1 200 OK\r\n" +
                 AccessControl +
-                String.format("Content-Length: %d\r\n", contentLength) +
-                String.format("Content-Type: %s\r\n",
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n",
                         "text/plain") +
                 // An empty line marks the end of the response's header
                 "\r\n";
@@ -40,8 +42,6 @@ public class HttpConstructor {
             bis = new BufferedInputStream(fis);
             bis.read(body,0,body.length);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -51,8 +51,8 @@ public class HttpConstructor {
 
         String head = "HTTP/1.1 200 OK\r\n" +
                 AccessControl +
-                String.format("Content-Length: %d\r\n", contentLength) +
-                String.format("Content-Type: %s\r\n",
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n",
                         "image/jpeg") +
                 // An empty line marks the end of the response's header
                 "\r\n";
@@ -73,8 +73,6 @@ public class HttpConstructor {
             bis = new BufferedInputStream(fis);
             bis.read(body,0,body.length);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -84,9 +82,9 @@ public class HttpConstructor {
 
         String head = "HTTP/1.1 200 OK\r\n" +
                 AccessControl +
-                String.format("Content-Length: %d\r\n", contentLength) +
-                String.format("Content-Type: %s\r\n", "video/mpeg4") +
-                String.format("Content-Disposition: form-data; name=\"test_video\"; filename=\"test_video.mp4\"\r\n") +
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n", "video/mpeg4") +
+                "Content-Disposition: form-data; name=\"test_video\"; filename=\"test_video.mp4\"\r\n" +
                 // An empty line marks the end of the response's header
                 "\r\n";
         return new Http(head, body);

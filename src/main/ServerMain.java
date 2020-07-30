@@ -3,7 +3,6 @@ package main;
 import http.HttpHandler;
 import logger.Logger;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ServerMain {
@@ -19,7 +18,7 @@ public class ServerMain {
 
     }
 
-    public int init(){
+    public void init(){
         //load history and database
         httpHandler.start();
         logger.log("HttpHandler running...");
@@ -33,7 +32,6 @@ public class ServerMain {
         httpHandler.stop();
 
         Logger.exportLog();
-        return 0;
     }
 
 }

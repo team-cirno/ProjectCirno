@@ -4,17 +4,19 @@ import java.io.*;
 
 public class HttpConstructor {
 
+    public static String AccessControl = String.format("Access-Control-Allow-Origin: *\r\n") +
+            String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
+            String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
+            String.format("Access-Control-Allow-Credentials: false\r\n") +
+            String.format("Access-Control-Max-Age: 3600\r\n");
+
     public static Http getDefault(){
 
         byte [] body = "The server says hi...\r\n".getBytes();
         int contentLength = body.length;
 
         String head = "HTTP/1.1 200 OK\r\n" +
-                String.format("Access-Control-Allow-Origin: *\r\n") +
-                String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
-                String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
-                String.format("Access-Control-Allow-Credentials: false\r\n") +
-                String.format("Access-Control-Max-Age: 3600\r\n") +
+                AccessControl +
                 String.format("Content-Length: %d\r\n", contentLength) +
                 String.format("Content-Type: %s\r\n",
                         "text/plain") +
@@ -48,11 +50,7 @@ public class HttpConstructor {
         int contentLength = body.length;
 
         String head = "HTTP/1.1 200 OK\r\n" +
-                String.format("Access-Control-Allow-Origin: *\r\n") +
-                String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
-                String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
-                String.format("Access-Control-Allow-Credentials: false\r\n") +
-                String.format("Access-Control-Max-Age: 3600\r\n") +
+                AccessControl +
                 String.format("Content-Length: %d\r\n", contentLength) +
                 String.format("Content-Type: %s\r\n",
                         "image/jpeg") +
@@ -85,11 +83,7 @@ public class HttpConstructor {
         int contentLength = body.length;
 
         String head = "HTTP/1.1 200 OK\r\n" +
-                String.format("Access-Control-Allow-Origin: *\r\n") +
-                String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
-                String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
-                String.format("Access-Control-Allow-Credentials: false\r\n") +
-                String.format("Access-Control-Max-Age: 3600\r\n") +
+                AccessControl +
                 String.format("Content-Length: %d\r\n", contentLength) +
                 String.format("Content-Type: %s\r\n", "video/mpeg4") +
                 String.format("Content-Disposition: form-data; name=\"test_video\"; filename=\"test_video.mp4\"\r\n") +

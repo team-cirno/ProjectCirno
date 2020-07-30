@@ -9,7 +9,6 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.KeyStore;
@@ -25,14 +24,14 @@ public class HttpHandler implements Runnable{
     public static Logger logger;
 
     public InetSocketAddress Address;
-    public static ServerSocket serverSocket;
+    public ServerSocket serverSocket;
     ExecutorService threadPool;
 
     private Thread t;
-    private String threadName;
+    private final String threadName = "HttpHandler";
 
-    static String address;
-    static int port;
+    String address;
+    int port;
     boolean isLive = false;
 
     public HttpHandler(String address, int port){
@@ -52,7 +51,6 @@ public class HttpHandler implements Runnable{
         }
         logger.log("Creating ThreadPool with cap of 8");
         threadPool = newCachedThreadPool(8);
-        threadName = "HttpHandler";
     }
 
 
@@ -75,7 +73,7 @@ public class HttpHandler implements Runnable{
         logger.log("Shutting Down HttpHandler...");
         isLive = false;
 
-        if (serverSocket!=null&&serverSocket.isClosed()==false) {
+        if (serverSocket!=null&& !serverSocket.isClosed()) {
             try {
                 serverSocket.close();
             } catch (IOException e) {
@@ -134,74 +132,6 @@ public class HttpHandler implements Runnable{
         return sslContext;
     }
 
-    private String getResponse(Charset encoding,String requestUrl) {
-//        ---------------------
-        String contentType = "text/plain";
-//        var body = "The server says hi 👋\r\n";
-//        var contentLength = ((String) body).getBytes(encoding).length;
-        Object body;
-        int contentLength;
-
-        if(requestUrl.equals("GET /auth HTTP/1.1")){
-            body = "random auth";
-            contentLength = ((String) body).getBytes(encoding).length;
-        }else if(requestUrl.equals("GET /file HTTP/1.1")){
-            File testFile = new File("./test_video.mp4");
-            byte[] byteArray = new byte[(int) testFile.length()];
-            FileInputStream fis = null;
-            try {
-                fis = new FileInputStream(testFile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            try {
-                bis.read(byteArray,0,byteArray.length);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            body = byteArray;
-            contentLength = byteArray.length;
-            contentType = "video/mpeg4";
-        }else if(requestUrl.equals("GET /image HTTP/1.1")){
-            File testImage = new File("./test_image.jpg");
-            byte[] byteArray = new byte[(int) testImage.length()];
-            FileInputStream fis = null;
-            try {
-                fis = new FileInputStream(testImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            try {
-                bis.read(byteArray,0,byteArray.length);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            body = byteArray;
-            contentLength = byteArray.length;
-            contentType = "image/jpeg";
-        }else{
-            body = "The server says hi 👋\r\n";
-            contentLength = ((String) body).getBytes(encoding).length;
-        }
-
-//        ---------------------
-
-        return "HTTP/1.1 200 OK\r\n" +
-                String.format("Access-Control-Allow-Origin: *\r\n") +
-                String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
-                String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
-                String.format("Access-Control-Allow-Credentials: false\r\n") +
-                String.format("Access-Control-Max-Age: 3600\r\n") +
-                String.format("Content-Length: %d\r\n", contentLength) +
-                String.format("Content-Type: %s; charset=%s\r\n",
-                        contentType,encoding.displayName()) +
-                // An empty line marks the end of the response's header
-                "\r\n" +
-                body;
-    }
-
     private ArrayList<String> getHeaderLines(BufferedReader reader) throws IOException {
         var lines = new ArrayList<String>();
         var line = reader.readLine();
@@ -231,7 +161,7 @@ public class HttpHandler implements Runnable{
                 try {
                     if(!isLive){
                         logger.log("Find server closed");
-                        if (serverSocket!=null&&serverSocket.isClosed()==false) {
+                        if (serverSocket!=null&& !serverSocket.isClosed()) {
                             try {
                                 serverSocket.close();
                             } catch (Exception e) {
@@ -248,11 +178,10 @@ public class HttpHandler implements Runnable{
 
                         try ( // Use the socket to read the client's request
                               var reader = new BufferedReader(new InputStreamReader(
-                                      socket.getInputStream(), encoding.name()));
+                                      socket.getInputStream()));
                         // Writing to the output stream and then closing it
                               // sends data to the client
-                              var writer = new BufferedWriter(new OutputStreamWriter(
-                                      socket.getOutputStream(), encoding.name()))
+                              var writer = socket.getOutputStream();
                         ) {
                             ArrayList<String> header;
                             header = getHeaderLines(reader);
@@ -261,9 +190,15 @@ public class HttpHandler implements Runnable{
                             //Auth
                             //Do Stuff
                             //get response
-                            writer.write(getResponse(encoding,header.get(0)));
+                            Http res = HttpConstructor.getMP4();
+                            writer.write(res.getHead().getBytes(),0,res.getHead().getBytes().length);
                             writer.flush();
+                            writer.write(res.getPayload(),0,res.getPayload().length);
+                            writer.flush();
+
                             // We're done with the connection → Close the socket
+                            writer.close();
+                            reader.close();
                             socket.close();
 
                         } catch (Exception e) {
@@ -271,9 +206,7 @@ public class HttpHandler implements Runnable{
                             e.printStackTrace();
                         }
                     });
-                } catch (SocketTimeoutException e) {
-
-                } catch (SocketException e) {
+                } catch (SocketTimeoutException | SocketException ignored) {
 
                 } catch (IOException e) {
                     System.err.println("Exception while handling connection");

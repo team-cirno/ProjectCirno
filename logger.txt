@@ -13,3 +13,172 @@
 [2020-07-30 06:19:32.316]	HttpHandler	-Shutting Down HttpHandler...
 [2020-07-30 06:19:32.316]	HttpHandler	-Shutting Down HttpHandler... Done.
 [2020-07-30 06:19:32.317]	HttpHandler	-Find server closed
+[2020-07-31 01:02:30.219]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:02:30.257]	ServerMain	-Creating Server Main
+[2020-07-31 01:02:30.278]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:02:30.278]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:02:30.278]	HttpHandler	-HTTP success
+[2020-07-31 01:02:30.279]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:02:30.283]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:02:30.283]	ServerMain	-HttpHandler running...
+[2020-07-31 01:02:30.287]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:02:30.288]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:02:30.288]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:02:37.431]	HttpHandler	-From: /10.0.0.33 | [GET / HTTP/1.1, Host: 10.0.0.33:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Accept-Encoding: gzip, deflate, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:02:37.935]	HttpHandler	-From: /10.0.0.33 | [GET /favicon.ico HTTP/1.1, Host: 10.0.0.33:2048, Connection: keep-alive, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Referer: http://10.0.0.33:2048/, Accept-Encoding: gzip, deflate, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:02:40.298]	ServerMain	-Still waiting
+[2020-07-31 01:02:40.298]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:02:40.298]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:02:40.298]	HttpHandler	-Find server closed
+[2020-07-31 01:03:36.136]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:03:36.165]	ServerMain	-Creating Server Main
+[2020-07-31 01:03:36.178]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:03:36.178]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:03:36.178]	HttpHandler	-HTTP success
+[2020-07-31 01:03:36.179]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:03:36.181]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:03:36.182]	ServerMain	-HttpHandler running...
+[2020-07-31 01:03:36.182]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:03:36.182]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:03:36.183]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:03:36.418]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: cross-site, Sec-Fetch-Mode: navigate, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:03:37.003]	HttpHandler	-From: /127.0.0.1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:03:42.115]	HttpHandler	-From: /127.0.0.1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:03:46.196]	ServerMain	-Still waiting
+[2020-07-31 01:03:46.196]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:03:46.196]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:03:46.196]	HttpHandler	-Find server closed
+[2020-07-31 01:39:31.942]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:39:31.963]	ServerMain	-Creating Server Main
+[2020-07-31 01:39:31.977]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:39:31.977]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:39:31.977]	HttpHandler	-HTTP success
+[2020-07-31 01:39:31.978]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:39:31.98]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:39:31.98]	ServerMain	-HttpHandler running...
+[2020-07-31 01:39:31.98]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:39:31.98]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:39:31.981]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:39:40.519]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:39:40.947]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Pragma: no-cache, Cache-Control: no-cache, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/image, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:39:41.992]	ServerMain	-Still waiting
+[2020-07-31 01:39:41.992]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:39:41.992]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:39:41.993]	HttpHandler	-Find server closed
+[2020-07-31 01:40:13.41]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:40:13.429]	ServerMain	-Creating Server Main
+[2020-07-31 01:40:13.436]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:40:13.436]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:40:13.436]	HttpHandler	-HTTP success
+[2020-07-31 01:40:13.437]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:40:13.438]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:40:13.438]	ServerMain	-HttpHandler running...
+[2020-07-31 01:40:13.439]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:40:13.439]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:40:13.439]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:40:14.541]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:40:14.938]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Pragma: no-cache, Cache-Control: no-cache, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/image, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:40:23.451]	ServerMain	-Still waiting
+[2020-07-31 01:40:23.451]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:40:23.451]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:40:23.451]	HttpHandler	-Find server closed
+[2020-07-31 01:44:47.003]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:44:47.022]	ServerMain	-Creating Server Main
+[2020-07-31 01:44:47.029]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:44:47.029]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:44:47.029]	HttpHandler	-HTTP success
+[2020-07-31 01:44:47.03]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:44:47.032]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:44:47.032]	ServerMain	-HttpHandler running...
+[2020-07-31 01:44:47.032]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:44:47.032]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:44:47.033]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:44:52.979]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:44:53.381]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/image, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:44:57.035]	ServerMain	-Still waiting
+[2020-07-31 01:44:57.035]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:44:57.035]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:44:57.036]	HttpHandler	-Find server closed
+[2020-07-31 01:45:22.572]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:45:22.59]	ServerMain	-Creating Server Main
+[2020-07-31 01:45:22.604]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:45:22.604]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:45:22.604]	HttpHandler	-HTTP success
+[2020-07-31 01:45:22.605]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:45:22.606]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:45:22.606]	ServerMain	-HttpHandler running...
+[2020-07-31 01:45:22.607]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:45:22.607]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:45:22.608]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:45:22.796]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:45:23.285]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Pragma: no-cache, Cache-Control: no-cache, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/image, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:45:32.616]	ServerMain	-Still waiting
+[2020-07-31 01:45:32.616]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:45:32.616]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:45:32.617]	HttpHandler	-Find server closed
+[2020-07-31 01:52:49.06]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 01:52:49.084]	ServerMain	-Creating Server Main
+[2020-07-31 01:52:49.094]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 01:52:49.095]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 01:52:49.095]	HttpHandler	-HTTP success
+[2020-07-31 01:52:49.095]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 01:52:49.098]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 01:52:49.098]	ServerMain	-HttpHandler running...
+[2020-07-31 01:52:49.098]	HttpHandler	-HttpHandler run...
+[2020-07-31 01:52:49.098]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 01:52:49.099]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 01:52:54.324]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:52:56.562]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Purpose: prefetch, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 01:52:59.102]	ServerMain	-Still waiting
+[2020-07-31 01:52:59.103]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 01:52:59.103]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 01:52:59.103]	HttpHandler	-Find server closed
+[2020-07-31 02:02:56.997]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 02:02:57.017]	ServerMain	-Creating Server Main
+[2020-07-31 02:02:57.036]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 02:02:57.037]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 02:02:57.037]	HttpHandler	-HTTP success
+[2020-07-31 02:02:57.038]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 02:02:57.04]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 02:02:57.04]	ServerMain	-HttpHandler running...
+[2020-07-31 02:02:57.04]	HttpHandler	-HttpHandler run...
+[2020-07-31 02:02:57.041]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 02:02:57.042]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 02:02:59.837]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 02:03:07.051]	ServerMain	-Still waiting
+[2020-07-31 02:03:07.051]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 02:03:07.051]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 02:03:07.052]	HttpHandler	-Find server closed
+[2020-07-31 02:07:20.553]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 02:07:20.577]	ServerMain	-Creating Server Main
+[2020-07-31 02:07:20.584]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 02:07:20.584]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 02:07:20.584]	HttpHandler	-HTTP success
+[2020-07-31 02:07:20.585]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 02:07:20.588]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 02:07:20.588]	ServerMain	-HttpHandler running...
+[2020-07-31 02:07:20.588]	HttpHandler	-HttpHandler run...
+[2020-07-31 02:07:20.588]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 02:07:20.59]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 02:07:28.337]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 02:07:28.767]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: cross-site, Sec-Fetch-Mode: navigate, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 02:07:30.59]	ServerMain	-Still waiting
+[2020-07-31 02:07:30.59]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 02:07:30.59]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 02:07:30.59]	HttpHandler	-Find server closed
+[2020-07-31 02:07:48.464]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 02:07:48.487]	ServerMain	-Creating Server Main
+[2020-07-31 02:07:48.499]	HttpHandler	-Creating HTTP hander Address: 10.0.0.33 | Port: 2048
+[2020-07-31 02:07:48.5]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 02:07:48.5]	HttpHandler	-HTTP success
+[2020-07-31 02:07:48.501]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 02:07:48.503]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 02:07:48.503]	ServerMain	-HttpHandler running...
+[2020-07-31 02:07:48.506]	HttpHandler	-HttpHandler run...
+[2020-07-31 02:07:48.506]	HttpHandler	-Starting multi-threaded server at /10.0.0.33:2048
+[2020-07-31 02:07:48.508]	HttpHandler	-Listening at address:Address: /10.0.0.33:2048 | Port: 2048
+[2020-07-31 02:07:50.154]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Cache-Control: max-age=0, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 02:07:58.51]	ServerMain	-Still waiting
+[2020-07-31 02:07:58.51]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 02:07:58.51]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-07-31 02:07:58.51]	HttpHandler	-Find server closed

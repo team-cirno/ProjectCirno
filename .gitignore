@@ -11,3 +11,5 @@ logger.txt
 *.class
 *.class
 *.class
+*.class
+serverStat.txt

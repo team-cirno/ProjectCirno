@@ -14,7 +14,7 @@ public class ServerMain {
     public ServerMain(){
         logger = new Logger(this);
         logger.log("Creating Server Main");
-        httpHandler = new HttpHandler("10.0.0.33", 2048);
+        httpHandler = new HttpHandler("192.168.0.110", 2048);
 
     }
 
@@ -24,7 +24,7 @@ public class ServerMain {
         logger.log("HttpHandler running...");
 
         try {
-            TimeUnit.SECONDS.sleep(10);
+            TimeUnit.SECONDS.sleep(120);
             logger.log("Still waiting");
         } catch (InterruptedException e) {
             e.printStackTrace();

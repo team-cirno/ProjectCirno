@@ -190,7 +190,7 @@ public class HttpHandler implements Runnable{
                             //Auth
                             //Do Stuff
                             //get response
-                            Http res = HttpConstructor.getMP4();
+                            Http res = HttpResponse.getResponse(encoding,header);
                             writer.write(res.getHead().getBytes(),0,res.getHead().getBytes().length);
                             writer.flush();
                             writer.write(res.getPayload(),0,res.getPayload().length);

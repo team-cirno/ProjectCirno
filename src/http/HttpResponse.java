@@ -2,74 +2,30 @@ package http;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 
 public class HttpResponse {
 
-    private String getResponse(Charset encoding, String requestUrl) {
-//        ---------------------
-        String contentType = "text/plain";
-//        var body = "The server says hi 👋\r\n";
-//        var contentLength = ((String) body).getBytes(encoding).length;
-        Object body;
-        int contentLength;
+    public static Http getResponse(Charset encoding, ArrayList<String> header) {
+        String requestUrl = header.get(0);
+//        String authorization = header.get(?);
 
-        if(requestUrl.equals("GET /auth HTTP/1.1")){
-            body = "random auth";
-            contentLength = ((String) body).getBytes(encoding).length;
+        if(requestUrl.equals("GET / HTTP/1.1")){
+//        if(!IsAuth()){
+//            return HttpConstructor.unauthorized();
+//         }
+            return HttpConstructor.getAuth();
         }else if(requestUrl.equals("GET /file HTTP/1.1")){
-            File testFile = new File("./test_video.mp4");
-            byte[] byteArray = new byte[(int) testFile.length()];
-            FileInputStream fis = null;
-            try {
-                fis = new FileInputStream(testFile);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            try {
-                bis.read(byteArray,0,byteArray.length);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            body = byteArray;
-            contentLength = byteArray.length;
-            contentType = "video/mpeg4";
+            return HttpConstructor.getMP4();
         }else if(requestUrl.equals("GET /image HTTP/1.1")){
-            File testImage = new File("./test_image.jpg");
-            byte[] byteArray = new byte[(int) testImage.length()];
-            FileInputStream fis = null;
-            try {
-                fis = new FileInputStream(testImage);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
-            BufferedInputStream bis = new BufferedInputStream(fis);
-            try {
-                bis.read(byteArray,0,byteArray.length);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            body = byteArray;
-            contentLength = byteArray.length;
-            contentType = "image/jpeg";
+            return HttpConstructor.getJpg();
         }else{
-            body = "The server says hi 👋\r\n";
-            contentLength = ((String) body).getBytes(encoding).length;
+            return HttpConstructor.getDefault();
         }
+    }
 
-//        ---------------------
-
-        return "HTTP/1.1 200 OK\r\n" +
-                String.format("Access-Control-Allow-Origin: *\r\n") +
-                String.format("Access-Control-Allow-Methods: GET, OPTIONS\r\n") +
-                String.format("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, X-Auth-Token, X-Csrf-Token, WWW-Authenticate, Authorization\r\n") +
-                String.format("Access-Control-Allow-Credentials: false\r\n") +
-                String.format("Access-Control-Max-Age: 3600\r\n") +
-                String.format("Content-Length: %d\r\n", contentLength) +
-                String.format("Content-Type: %s; charset=%s\r\n",
-                        contentType,encoding.displayName()) +
-                // An empty line marks the end of the response's header
-                "\r\n" +
-                body;
+    private static boolean IsAuth(String userId, String authorization){
+        //check Auth
+        return true;
     }
 }

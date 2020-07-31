@@ -29,7 +29,7 @@ public class HttpConstructor {
         return new Http(head, body);
     }
 
-    public static Http getImage(){
+    public static Http getJpg(){
 
 
         FileInputStream fis = null;
@@ -89,4 +89,25 @@ public class HttpConstructor {
                 "\r\n";
         return new Http(head, body);
     }
+
+    public static Http getAuth(){
+        //Need generate random access code
+        byte [] body = "RandomAuth\r\n".getBytes();
+        int contentLength = body.length;
+
+        String head = "HTTP/1.1 200 OK\r\n" +
+                AccessControl +
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n",
+                        "text/plain") +
+                // An empty line marks the end of the response's header
+                "\r\n";
+
+        return new Http(head,body);
+    }
+
+//    public static Http unauthorized(){
+//
+//        return new Http(head,body);
+//    }
 }

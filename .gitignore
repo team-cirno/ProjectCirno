@@ -14,3 +14,4 @@ logger.txt
 *.class
 serverStat.txt
 *.txt
+out/production/ProjectCirno/http/HttpHandler.class

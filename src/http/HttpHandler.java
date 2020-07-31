@@ -19,7 +19,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class HttpHandler{
+public class HttpHandler implements Runnable{
 
     public static Logger logger;
 
@@ -32,15 +32,7 @@ public class HttpHandler{
 
     String address;
     int port;
-    static boolean isLive;
-
-    public static synchronized boolean isLive(){
-        return isLive;
-    }
-
-    public static synchronized void setIsLive(boolean isLive){
-        HttpHandler.isLive = isLive;
-    }
+    boolean isLive = false;
 
     public HttpHandler(String address, int port){
         this.address = address;
@@ -62,16 +54,16 @@ public class HttpHandler{
     }
 
 
+    @Override
     public void run() {
-        setIsLive(true);
+        isLive = true;
         logger.log("HttpHandler run...");
         startMultiThreaded(Address);
     }
 
     public void stop() {
         logger.log("Shutting Down HttpHandler...");
-        setIsLive(false);
-        threadPool.shutdownNow();
+        isLive = false;
 
         if (serverSocket!=null&& !serverSocket.isClosed()) {
             try {
@@ -146,78 +138,70 @@ public class HttpHandler{
     public void startMultiThreaded(InetSocketAddress address) {
         logger.log("Starting multi-threaded server at " + address);
 
+        // A cached thread pool with a limited number of threads
 
-
-
-            // A cached thread pool with a limited number of threads
-
-            var encoding = StandardCharsets.UTF_8;
-            logger.log("Listening at address:" +
-                    String.format("Address: %s | ", address)+
-                    String.format("Port: %d", port));
-            // This infinite loop is not CPU-intensive since method "accept" blocks
-            // until a client has made a connection to the socket
-            while (isLive()) {
-                try {
-                    if(!isLive()){
-                        logger.log("Find server closed");
-                        if (serverSocket!=null&& !serverSocket.isClosed()) {
-                            try {
-                                serverSocket.close();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        break;
-                    }
-                    var socket = serverSocket.accept();
-                    logger.log("Get a request");
-                    if(!isLive()) {
-                        logger.log("Find dead");
-                        break;
-                    }
-                    // Create a response to the request on a separate thread to
-                    // handle multiple requests simultaneously
-                    threadPool.submit(() -> {
-
-                        try ( // Use the socket to read the client's request
-                              var reader = new BufferedReader(new InputStreamReader(
-                                      socket.getInputStream()));
-                        // Writing to the output stream and then closing it
-                              // sends data to the client
-                              var writer = socket.getOutputStream();
-                        ) {
-                            ArrayList<String> header;
-                            header = getHeaderLines(reader);
-                            logger.log("From: "+socket.getInetAddress().toString()+" | "+header.toString());
-                            //getHeaderLines(reader).forEach(System.out::println);
-                            //Auth
-                            //Do Stuff
-                            //get response
-                            Http res = HttpResponse.getResponse(encoding,header);
-                            writer.write(res.getHead().getBytes(),0,res.getHead().getBytes().length);
-                            writer.flush();
-                            writer.write(res.getPayload(),0,res.getPayload().length);
-                            writer.flush();
-
-                            // We're done with the connection → Close the socket
-                            writer.close();
-                            reader.close();
-                            socket.close();
-
+        var encoding = StandardCharsets.UTF_8;
+        logger.log("Listening at address:" +
+                String.format("Address: %s | ", address)+
+                String.format("Port: %d", port));
+        // This infinite loop is not CPU-intensive since method "accept" blocks
+        // until a client has made a connection to the socket
+        while (true) {
+            try {
+                if(!isLive){
+                    logger.log("Find server closed");
+                    if (serverSocket!=null&& !serverSocket.isClosed()) {
+                        try {
+                            serverSocket.close();
                         } catch (Exception e) {
-                            System.err.println("Exception while creating response");
                             e.printStackTrace();
                         }
-                    });
-                } catch (SocketTimeoutException | SocketException ignored) {
-
-                } catch (IOException e) {
-                    System.err.println("Exception while handling connection");
-                    e.printStackTrace();
+                    }
+                    break;
                 }
+                var socket = serverSocket.accept();
+
+                // Create a response to the request on a separate thread to
+                // handle multiple requests simultaneously
+                threadPool.submit(() -> {
+
+                    try ( // Use the socket to read the client's request
+                          var reader = new BufferedReader(new InputStreamReader(
+                                  socket.getInputStream()));
+                          // Writing to the output stream and then closing it
+                          // sends data to the client
+                          var writer = socket.getOutputStream();
+                    ) {
+                        ArrayList<String> header;
+                        header = getHeaderLines(reader);
+                        logger.log("From: "+socket.getInetAddress().toString()+" | "+header.toString());
+                        //getHeaderLines(reader).forEach(System.out::println);
+                        //Auth
+                        //Do Stuff
+                        //get response
+                        Http res = HttpResponse.getResponse(encoding,header);
+                        writer.write(res.getHead().getBytes(),0,res.getHead().getBytes().length);
+                        writer.flush();
+                        writer.write(res.getPayload(),0,res.getPayload().length);
+                        writer.flush();
+
+                        // We're done with the connection → Close the socket
+                        writer.close();
+                        reader.close();
+                        socket.close();
+
+                    } catch (Exception e) {
+                        System.err.println("Exception while creating response");
+                        e.printStackTrace();
+                    }
+                });
+            } catch (SocketTimeoutException | SocketException ignored) {
+
+            } catch (IOException e) {
+                System.err.println("Exception while handling connection");
+                e.printStackTrace();
             }
-            threadPool.shutdownNow();
+        }
 
     }
 

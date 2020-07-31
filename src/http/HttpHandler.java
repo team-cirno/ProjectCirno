@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -25,18 +26,29 @@ public class HttpHandler implements Runnable{
 
     public InetSocketAddress Address;
     public ServerSocket serverSocket;
-    ExecutorService threadPool;
 
     private Thread t;
     private final String threadName = "HttpHandler";
+    HttpThread[] threadPool;
 
     String address;
     int port;
-    boolean isLive = false;
+    static boolean isLive = false;
+
+    int counter;
+
+    public static synchronized boolean isLive(){
+        return isLive;
+    }
+
+    public static synchronized void setIsLive(boolean isLive){
+        HttpHandler.isLive = isLive;
+    }
 
     public HttpHandler(String address, int port){
         this.address = address;
         this.port = port;
+        counter = 0;
         logger = new Logger(this);
         logger.log("Creating HTTP hander "+
                 String.format("Address: %s | ", address)+
@@ -49,21 +61,22 @@ public class HttpHandler implements Runnable{
             System.err.println("Could not create socket at " + address);
             e.printStackTrace();
         }
+        threadPool = new HttpThread[20];
+
         logger.log("Creating ThreadPool with cap of 8");
-        threadPool = newCachedThreadPool(8);
     }
 
 
     @Override
     public void run() {
-        isLive = true;
+        setIsLive(true);
         logger.log("HttpHandler run...");
         startMultiThreaded(Address);
     }
 
     public void stop() {
         logger.log("Shutting Down HttpHandler...");
-        isLive = false;
+        setIsLive(false);
 
         if (serverSocket!=null&& !serverSocket.isClosed()) {
             try {
@@ -71,6 +84,15 @@ public class HttpHandler implements Runnable{
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        for (int i = 0 ; i<threadPool.length;i++)
+        {
+            if(threadPool[i] != null || !threadPool[i].isClosed()){
+                threadPool[i].close();
+                threadPool[i].interrupt();
+                threadPool[i].stop();
+            };
         }
 
         logger.log("Shutting Down HttpHandler... Done.");
@@ -81,7 +103,7 @@ public class HttpHandler implements Runnable{
     public ServerSocket getServerSocket(InetSocketAddress address)
             throws Exception {
 
-        int https = 0;
+        int https = 1;
 
         if(https == 0){
             logger.log("Get HTTP ServerSocket");
@@ -146,9 +168,10 @@ public class HttpHandler implements Runnable{
                 String.format("Port: %d", port));
         // This infinite loop is not CPU-intensive since method "accept" blocks
         // until a client has made a connection to the socket
+
         while (true) {
             try {
-                if(!isLive){
+                if(!isLive()){
                     logger.log("Find server closed");
                     if (serverSocket!=null&& !serverSocket.isClosed()) {
                         try {
@@ -161,56 +184,32 @@ public class HttpHandler implements Runnable{
                 }
                 var socket = serverSocket.accept();
 
-                // Create a response to the request on a separate thread to
-                // handle multiple requests simultaneously
-                threadPool.submit(() -> {
+                int alloc = -1;
+                for (int i = 0 ; i<threadPool.length;i++)
+                {
+                    if(threadPool[i] == null || threadPool[i].isClosed()){
+                        HttpThread var = new HttpThread(socket, i);
+                        var.start();
+                        threadPool[i]=var;
+                        counter +=1;
+                        alloc = i;
+                        logger.log("Alloc in thread #"+i);
+                        break;
+                    };
+                }
+                if(alloc == -1){
+                    logger.log("Faild to Alloc too busy");
+                    socket.close();
+                }
 
-                    try ( // Use the socket to read the client's request
-                          var reader = new BufferedReader(new InputStreamReader(
-                                  socket.getInputStream()));
-                          // Writing to the output stream and then closing it
-                          // sends data to the client
-                          var writer = socket.getOutputStream();
-                    ) {
-                        ArrayList<String> header;
-                        header = getHeaderLines(reader);
-                        logger.log("From: "+socket.getInetAddress().toString()+" | "+header.toString());
-                        //getHeaderLines(reader).forEach(System.out::println);
-                        //Auth
-                        //Do Stuff
-                        //get response
-                        Http res = HttpResponse.getResponse(encoding,header);
-                        writer.write(res.getHead().getBytes(),0,res.getHead().getBytes().length);
-                        writer.flush();
-                        writer.write(res.getPayload(),0,res.getPayload().length);
-                        writer.flush();
+            } catch (SocketTimeoutException ignored) {
 
-                        // We're done with the connection → Close the socket
-                        writer.close();
-                        reader.close();
-                        socket.close();
-
-                    } catch (Exception e) {
-                        System.err.println("Exception while creating response");
-                        e.printStackTrace();
-                    }
-                });
-            } catch (SocketTimeoutException | SocketException ignored) {
+            } catch (SocketException e) {
 
             } catch (IOException e) {
                 System.err.println("Exception while handling connection");
                 e.printStackTrace();
             }
         }
-
     }
-
-    private ExecutorService newCachedThreadPool(int maximumNumberOfThreads) {
-        return new ThreadPoolExecutor(0, maximumNumberOfThreads,
-                60L, TimeUnit.SECONDS,
-                new SynchronousQueue<>());
-    }
-
-
-
 }

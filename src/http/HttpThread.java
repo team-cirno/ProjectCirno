@@ -5,6 +5,7 @@ import logger.Logger;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
@@ -13,26 +14,32 @@ import java.util.ArrayList;
 public class HttpThread extends Thread {
 
 
-
+    private OutputStream writer;
+    private BufferedReader reader;
     Socket socket;
     private final int clientNo;
+    boolean closed;
     Logger logger;
 
     public HttpThread(Socket socket, int clientNo) {
         this.socket = socket;
         this.clientNo = clientNo;
         logger = new Logger(this);
+        this.closed = false;
+
+        try {
+            reader = new BufferedReader(new InputStreamReader(
+                    socket.getInputStream()));
+            writer = socket.getOutputStream();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void run() {
         var encoding = StandardCharsets.UTF_8;
-        try ( // Use the socket to read the client's request
-              var reader = new BufferedReader(new InputStreamReader(
-                      socket.getInputStream()));
-              // Writing to the output stream and then closing it
-              // sends data to the client
-              var writer = socket.getOutputStream();
-        ) {
+        logger.log("Client #"+clientNo+" Start");
+        try{
             ArrayList<String> header;
             header = getHeaderLines(reader);
             logger.log("Client #" +clientNo+" | From: " + socket.getInetAddress().toString() + " | " + header.toString());
@@ -50,16 +57,29 @@ public class HttpThread extends Thread {
             writer.close();
             reader.close();
             socket.close();
+            this.closed = true;
 
         } catch (Exception e) {
-            System.err.println("Exception while creating response");
-            e.printStackTrace();
+
         } finally{
             logger.log("Client -" + clientNo + " exit!! ");
         }
 
     }
+    public void close(){
+        try {
+            writer.close();
+            reader.close();
+            socket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
 
     private ArrayList<String> getHeaderLines(BufferedReader reader) throws IOException {
         var lines = new ArrayList<String>();

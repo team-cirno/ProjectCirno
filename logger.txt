@@ -182,3 +182,23 @@
 [2020-07-31 02:07:58.51]	HttpHandler	-Shutting Down HttpHandler...
 [2020-07-31 02:07:58.51]	HttpHandler	-Shutting Down HttpHandler... Done.
 [2020-07-31 02:07:58.51]	HttpHandler	-Find server closed
+[2020-07-31 10:15:19.836]	ServerLauncher	-Starting Launch Process...
+[2020-07-31 10:15:19.866]	ServerMain	-Creating Server Main
+[2020-07-31 10:15:19.885]	HttpHandler	-Creating HTTP hander Address: 192.168.0.110 | Port: 2048
+[2020-07-31 10:15:19.885]	HttpHandler	-Get HTTP ServerSocket
+[2020-07-31 10:15:19.885]	HttpHandler	-HTTP success
+[2020-07-31 10:15:19.886]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-07-31 10:15:19.888]	HttpHandler	-Starting Thread - HttpHandler
+[2020-07-31 10:15:19.888]	ServerMain	-HttpHandler running...
+[2020-07-31 10:15:19.888]	HttpHandler	-HttpHandler run...
+[2020-07-31 10:15:19.889]	HttpHandler	-Starting multi-threaded server at /192.168.0.110:2048
+[2020-07-31 10:15:19.89]	HttpHandler	-Listening at address:Address: /192.168.0.110:2048 | Port: 2048
+[2020-07-31 10:15:26.768]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 10:15:27.261]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 10:15:36.25]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /image HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 10:15:36.416]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/image, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 10:15:40.188]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /idsadas HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 10:15:40.362]	HttpHandler	-From: /0:0:0:0:0:0:0:1 | [GET /favicon.ico HTTP/1.1, Host: localhost:2048, Connection: keep-alive, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: image/webp,image/apng,image/*,*/*;q=0.8, Sec-Fetch-Site: same-origin, Sec-Fetch-Mode: no-cors, Sec-Fetch-Dest: image, Referer: http://localhost:2048/idsadas, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-07-31 10:17:19.893]	ServerMain	-Still waiting
+[2020-07-31 10:17:19.893]	HttpHandler	-Shutting Down HttpHandler...
+[2020-07-31 10:17:19.893]	HttpHandler	-Shutting Down HttpHandler... Done.

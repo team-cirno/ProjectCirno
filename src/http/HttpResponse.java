@@ -11,10 +11,10 @@ public class HttpResponse {
 //        String authorization = header.get(?);
 
         if(requestUrl.equals("GET / HTTP/1.1")){
-//            if(!IsAuth()){
-//                return HttpConstructor.unauthorized();
-//            }
-            return HttpConstructor.getDefault();
+//        if(!IsAuth()){
+//            return HttpConstructor.unauthorized();
+//         }
+            return HttpConstructor.getAuth();
         }else if(requestUrl.equals("GET /file HTTP/1.1")){
             return HttpConstructor.getMP4();
         }else if(requestUrl.equals("GET /image HTTP/1.1")){

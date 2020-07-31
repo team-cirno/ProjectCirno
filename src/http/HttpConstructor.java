@@ -90,7 +90,7 @@ public class HttpConstructor {
         return new Http(head, body);
     }
 
-    public static Http sendAuth(){
+    public static Http getAuth(){
         //Need generate random access code
         byte [] body = "RandomAuth\r\n".getBytes();
         int contentLength = body.length;
@@ -105,4 +105,9 @@ public class HttpConstructor {
 
         return new Http(head,body);
     }
+
+//    public static Http unauthorized(){
+//
+//        return new Http(head,body);
+//    }
 }

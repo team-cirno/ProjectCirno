@@ -19,7 +19,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class HttpHandler implements Runnable{
+public class HttpHandler{
 
     public static Logger logger;
 
@@ -32,7 +32,15 @@ public class HttpHandler implements Runnable{
 
     String address;
     int port;
-    boolean isLive = false;
+    static boolean isLive;
+
+    public static synchronized boolean isLive(){
+        return isLive;
+    }
+
+    public static synchronized void setIsLive(boolean isLive){
+        HttpHandler.isLive = isLive;
+    }
 
     public HttpHandler(String address, int port){
         this.address = address;
@@ -54,24 +62,16 @@ public class HttpHandler implements Runnable{
     }
 
 
-    @Override
     public void run() {
-        isLive = true;
+        setIsLive(true);
         logger.log("HttpHandler run...");
         startMultiThreaded(Address);
     }
 
-    public void start() {
-        logger.log("Starting Thread - " +  threadName );
-        if (t == null) {
-            t = new Thread (this, threadName);
-            t.start ();
-        }
-    }
-
     public void stop() {
         logger.log("Shutting Down HttpHandler...");
-        isLive = false;
+        setIsLive(false);
+        threadPool.shutdownNow();
 
         if (serverSocket!=null&& !serverSocket.isClosed()) {
             try {
@@ -157,9 +157,9 @@ public class HttpHandler implements Runnable{
                     String.format("Port: %d", port));
             // This infinite loop is not CPU-intensive since method "accept" blocks
             // until a client has made a connection to the socket
-            while (true) {
+            while (isLive()) {
                 try {
-                    if(!isLive){
+                    if(!isLive()){
                         logger.log("Find server closed");
                         if (serverSocket!=null&& !serverSocket.isClosed()) {
                             try {
@@ -171,7 +171,11 @@ public class HttpHandler implements Runnable{
                         break;
                     }
                     var socket = serverSocket.accept();
-
+                    logger.log("Get a request");
+                    if(!isLive()) {
+                        logger.log("Find dead");
+                        break;
+                    }
                     // Create a response to the request on a separate thread to
                     // handle multiple requests simultaneously
                     threadPool.submit(() -> {
@@ -213,6 +217,7 @@ public class HttpHandler implements Runnable{
                     e.printStackTrace();
                 }
             }
+            threadPool.shutdownNow();
 
     }
 

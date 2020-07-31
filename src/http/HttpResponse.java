@@ -1,5 +1,7 @@
 package http;
 
+import main.ServerMain;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -11,14 +13,18 @@ public class HttpResponse {
 //        String authorization = header.get(?);
 
         if(requestUrl.equals("GET / HTTP/1.1")){
-//        if(!IsAuth()){
-//            return HttpConstructor.unauthorized();
-//         }
+            return HttpConstructor.getDefault();
+        }else if(requestUrl.equals("GET /auth HTTP/1.1")){
             return HttpConstructor.getAuth();
         }else if(requestUrl.equals("GET /file HTTP/1.1")){
             return HttpConstructor.getMP4();
         }else if(requestUrl.equals("GET /image HTTP/1.1")){
             return HttpConstructor.getJpg();
+        }else if(requestUrl.equals("GET /favicon.ico HTTP/1.1")){
+            return HttpConstructor.getIcon();
+        }else if(requestUrl.equals("GET /stop HTTP/1.1")){
+            ServerMain.stop();
+            return HttpConstructor.getStop();
         }else{
             return HttpConstructor.getDefault();
         }

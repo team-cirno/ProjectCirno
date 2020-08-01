@@ -1,0 +1,20 @@
+[2020-08-02 04:01:25.704]	ServerLauncher	-Starting Launch Process...
+[2020-08-02 04:01:25.723]	ServerMain	-Creating Server Main
+[2020-08-02 04:01:25.739]	HttpHandler	-Creating HTTP hander Address: 10.0.0.16 | Port: 2048
+[2020-08-02 04:01:25.739]	HttpHandler	-Get HTTP ServerSocket
+[2020-08-02 04:01:25.739]	HttpHandler	-HTTP success
+[2020-08-02 04:01:25.74]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-08-02 04:01:25.74]	HttpHandler	-HttpHandler run...
+[2020-08-02 04:01:25.741]	HttpHandler	-Starting multi-threaded server at /10.0.0.16:2048
+[2020-08-02 04:01:25.741]	HttpHandler	-Listening at address:Address: /10.0.0.16:2048 | Port: 2048
+[2020-08-02 04:01:28.379]	HttpHandler	-Alloc in thread #0
+[2020-08-02 04:01:28.379]	HttpHandler	-Alloc in thread #1
+[2020-08-02 04:01:28.379]	HttpThread	-Client #0 Start
+[2020-08-02 04:01:28.38]	HttpThread	-Client #1 Start
+[2020-08-02 04:01:28.393]	HttpThread	-Client #0 | From: /0:0:0:0:0:0:0:1 | [GET / HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Purpose: prefetch, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-08-02 04:01:28.411]	HttpThread	-Client -0 exit!! 
+[2020-08-02 04:01:29.173]	HttpHandler	-Alloc in thread #0
+[2020-08-02 04:01:29.174]	HttpThread	-Client #0 Start
+[2020-08-02 04:01:36.71]	HttpThread	-Client #1 | From: /0:0:0:0:0:0:0:1 | [GET /stop HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Purpose: prefetch, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
+[2020-08-02 04:01:36.71]	HttpHandler	-Shutting Down HttpHandler...
+[2020-08-02 04:01:36.711]	HttpHandler	-Find server closed

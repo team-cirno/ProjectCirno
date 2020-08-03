@@ -14,7 +14,7 @@ public class ServerMain {
     public ServerMain(){
         logger = new Logger(this);
         logger.log("Creating Server Main");
-        httpHandler = new HttpHandler("10.0.0.16", 2048);
+        httpHandler = new HttpHandler(" 192.168.0.107", 2048);
 
     }
 

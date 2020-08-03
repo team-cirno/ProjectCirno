@@ -5,24 +5,25 @@ import main.ServerMain;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HttpResponse {
 
-    public static Http getResponse(Charset encoding, ArrayList<String> header) {
-        String requestUrl = header.get(0);
+    public static Http getResponse(Charset encoding, HashMap<String,String> header) {
+        String requestUrl = header.get("url");
 //        String authorization = header.get(?);
 
-        if(requestUrl.equals("GET / HTTP/1.1")){
+        if(requestUrl.equals("/")){
             return HttpConstructor.getDefault();
-        }else if(requestUrl.equals("GET /auth HTTP/1.1")){
+        }else if(requestUrl.equals("/auth")){
             return HttpConstructor.getAuth();
-        }else if(requestUrl.equals("GET /file HTTP/1.1")){
+        }else if(requestUrl.equals("/file")){
             return HttpConstructor.getMP4();
-        }else if(requestUrl.equals("GET /image HTTP/1.1")){
+        }else if(requestUrl.equals("/image")){
             return HttpConstructor.getJpg();
-        }else if(requestUrl.equals("GET /favicon.ico HTTP/1.1")){
+        }else if(requestUrl.equals("/favicon.ico")){
             return HttpConstructor.getIcon();
-        }else if(requestUrl.equals("GET /stop HTTP/1.1")){
+        }else if(requestUrl.equals("/stop")){
             ServerMain.stop();
             return HttpConstructor.getStop();
         }else{

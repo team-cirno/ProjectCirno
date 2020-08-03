@@ -12,9 +12,7 @@ import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.KeyStore;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -144,17 +142,6 @@ public class HttpHandler implements Runnable{
         // Null means using default implementations for TrustManager and SecureRandom
         sslContext.init(keyManagerFactory.getKeyManagers(), null, null);
         return sslContext;
-    }
-
-    private ArrayList<String> getHeaderLines(BufferedReader reader) throws IOException {
-        var lines = new ArrayList<String>();
-        var line = reader.readLine();
-        // An empty line marks the end of the request's header
-        while (!line.isEmpty()) {
-            lines.add(line);
-            line = reader.readLine();
-        }
-        return lines;
     }
 
     public void startMultiThreaded(InetSocketAddress address) {

@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class HttpThread extends Thread {
 
@@ -40,7 +42,7 @@ public class HttpThread extends Thread {
         var encoding = StandardCharsets.UTF_8;
         logger.log("Client #"+clientNo+" Start");
         try{
-            ArrayList<String> header;
+            HashMap<String,String> header;
             header = getHeaderLines(reader);
             logger.log("Client #" +clientNo+" | From: " + socket.getInetAddress().toString() + " | " + header.toString());
             //getHeaderLines(reader).forEach(System.out::println);
@@ -81,14 +83,33 @@ public class HttpThread extends Thread {
         return closed;
     }
 
-    private ArrayList<String> getHeaderLines(BufferedReader reader) throws IOException {
-        var lines = new ArrayList<String>();
-        var line = reader.readLine();
-        // An empty line marks the end of the request's header
-        while (!line.isEmpty()) {
-            lines.add(line);
-            line = reader.readLine();
+//    private ArrayList<String> getHeaderLines(BufferedReader reader) throws IOException {
+//        var lines = new ArrayList<String>();
+//        var line = reader.readLine();
+//        // An empty line marks the end of the request's header
+//        while (!line.isEmpty()) {
+//            lines.add(line);
+//            line = reader.readLine();
+//        }
+//        return lines;
+//    }
+
+    private HashMap<String, String> getHeaderLines(BufferedReader reader) throws IOException {
+        Scanner scan = new Scanner(reader);
+        scan.useDelimiter(Pattern.compile("\r\n\r\n"));
+        String headerString = scan.next();
+        HashMap<String,String> header = new HashMap<>();
+        for (String line : headerString.split("\r\n")){
+            if (!line.contains(":")){
+                String[] parts = line.split(" ");
+                header.put("method",parts[0]);
+                header.put("url",parts[1]);
+                header.put("httpVersion",parts[2]);
+            }else {
+                String[] pair = line.split(": ");
+                header.put(pair[0], pair[1]);
+            }
         }
-        return lines;
+        return header;
     }
 }

@@ -58,7 +58,7 @@ public class HttpThread extends Thread {
                     head += line+"\r\n";
                 };
                 header = getHeaderLines(head);
-                logger.log("Client #" + clientNo + " | From: " + socket.getInetAddress().toString() + " | " + header.get("url") + header.toString());
+                logger.log("Client #" + clientNo + " | From: " + socket.getInetAddress().toString() + " | " + header.get("url") + " " + header.toString());
                 //getHeaderLines(reader).forEach(System.out::println);
                 //Auth
                 //Do Stuff

@@ -23,11 +23,13 @@ public class HttpResponse {
             return HttpConstructor.getJpg();
         }else if(requestUrl.equals("/favicon.ico")){
             return HttpConstructor.getIcon();
+        }else if(requestUrl.equals("/profile")){
+            return HttpConstructor.getIcon();
         }else if(requestUrl.equals("/stop")){
             ServerMain.stop();
             return HttpConstructor.getStop();
         }else{
-            return HttpConstructor.getDefault();
+            return HttpConstructor.getFile(requestUrl,header.get("Accept"));
         }
     }
 

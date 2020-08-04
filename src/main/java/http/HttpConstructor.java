@@ -1,6 +1,8 @@
 package http;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static java.lang.String.format;
 
@@ -91,6 +93,7 @@ public class HttpConstructor {
 
         return new Http(head, body);
     }
+
     public static Http getMP4(){
 
 
@@ -115,7 +118,43 @@ public class HttpConstructor {
                 AccessControl +
                 format("Content-Length: %d\r\n", contentLength) +
                 format("Content-Type: %s\r\n", "video/mpeg4") +
-                "Content-Disposition: form-data; name=\"test_video\"; filename=\"test_video.mp4\"\r\n" +
+                "Content-Disposition: inline; name=\"test_video\"; " +
+                format("filename=\"test_video.mp4\"\r\n") +
+                // An empty line marks the end of the response's header
+                "\r\n";
+        return new Http(head, body);
+    }
+    public static Http getFile(String filePath, String context){
+
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+
+        Path path = new File("./www"+filePath).toPath();
+        String mimeType = null;
+        try {
+            mimeType = Files.probeContentType(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File myFile = new File("./www"+filePath);
+        byte [] body  = new byte [(int)myFile.length()];
+        try {
+            fis = new FileInputStream(myFile);
+            bis = new BufferedInputStream(fis);
+            bis.read(body,0,body.length);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        int contentLength = body.length;
+
+        String head = "HTTP/1.1 200 OK\r\n" +
+                AccessControl +
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n", mimeType) +
                 // An empty line marks the end of the response's header
                 "\r\n";
         return new Http(head, body);

@@ -23,7 +23,65 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9f8668d-a4b1-4e0f-87fd-69cdf76b7da8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/www/apple-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/css/app.325f2b15.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.03ef1918.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.5987dd12.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.b17a118e.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.f0b489a5.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/anime3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/anime6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/apple-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/bg5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/default-avatar.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/emilyz.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/favicon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-120x120.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-152x152.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-180x180.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-60x60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-76x76.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/msapplication-icon-144x144.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/mstile-150x150.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/icons/safari-pinned-tab.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/img_3115.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/james.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/img/mike.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/app.687e1e99.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/app.687e1e99.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/chunk-vendors.e57a0b99.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/chunk-vendors.e57a0b99.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/common.46ddfa99.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/common.46ddfa99.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/dashboard.a2bc5ebc.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/js/dashboard.a2bc5ebc.js.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/precache-manifest.2aade6961db6466ba891085c41e71283.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/www/service-worker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/database/DBtest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DBtest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/http/HttpConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/http/HttpConstructor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/http/HttpResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/http/HttpResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/user/Student.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/user/Teacher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/object/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/database/DBtest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/database/DBtest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/http/HttpConstructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpConstructor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/http/HttpHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/http/HttpResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/http/HttpThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/main/ServerMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/ServerMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/object/user/Student.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/object/user/Teacher.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/object/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/object/user/User.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,22 +180,26 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1596312333046">
+    <state x="743" y="246" key="#com.intellij.ide.util.MemberChooser" timestamp="1596572367732">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1596312333046" />
-    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1596312333046">
+    <state x="743" y="246" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1596572367732" />
+    <state width="1340" height="266" key="GridCell.Tab.0.bottom" timestamp="1596572480553">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1596312333046" />
-    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1596312333046">
+    <state width="1340" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1596572480553" />
+    <state width="1340" height="266" key="GridCell.Tab.0.center" timestamp="1596572480553">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1596312333046" />
-    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1596312333046">
+    <state width="1340" height="266" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1596572480553" />
+    <state width="1340" height="266" key="GridCell.Tab.0.left" timestamp="1596572480553">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1596312333046" />
+    <state width="1340" height="266" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1596572480553" />
+    <state width="1340" height="266" key="GridCell.Tab.0.right" timestamp="1596572480553">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state width="1340" height="266" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1596572480553" />
     <state x="426" y="201" key="Maven.ArtifactSearchDialog" timestamp="1596312023574">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

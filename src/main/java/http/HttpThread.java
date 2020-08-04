@@ -44,7 +44,7 @@ public class HttpThread extends Thread {
         try{
             HashMap<String,String> header;
             header = getHeaderLines(reader);
-            logger.log("Client #" +clientNo+" | From: " + socket.getInetAddress().toString() + " | " + header.toString());
+            logger.log("Client #" +clientNo+" | From: " + socket.getInetAddress().toString() + " | " +  header.get("url")+ header.toString());
             //getHeaderLines(reader).forEach(System.out::println);
             //Auth
             //Do Stuff

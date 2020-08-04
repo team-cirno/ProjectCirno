@@ -170,7 +170,6 @@ public class HttpHandler implements Runnable{
                     break;
                 }
                 var socket = serverSocket.accept();
-
                 int alloc = -1;
                 for (int i = 0 ; i<threadPool.length;i++)
                 {

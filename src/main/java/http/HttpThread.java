@@ -8,8 +8,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
+import java.net.SocketTimeoutException;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -25,6 +28,11 @@ public class HttpThread extends Thread {
 
     public HttpThread(Socket socket, int clientNo) {
         this.socket = socket;
+        try {
+            this.socket.setSoTimeout(10*1000);
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
         this.clientNo = clientNo;
         logger = new Logger(this);
         this.closed = false;
@@ -41,27 +49,42 @@ public class HttpThread extends Thread {
     public void run() {
         var encoding = StandardCharsets.UTF_8;
         logger.log("Client #"+clientNo+" Start");
-        try{
-            HashMap<String,String> header;
-            header = getHeaderLines(reader);
-            logger.log("Client #" +clientNo+" | From: " + socket.getInetAddress().toString() + " | " +  header.get("url")+ header.toString());
-            //getHeaderLines(reader).forEach(System.out::println);
-            //Auth
-            //Do Stuff
-            //get response
-            Http res = HttpResponse.getResponse(encoding, header);
-            writer.write(res.getHead().getBytes(), 0, res.getHead().getBytes().length);
-            writer.flush();
-            writer.write(res.getPayload(), 0, res.getPayload().length);
-            writer.flush();
-
+        try{try {
+            while (!this.closed) {
+                HashMap<String, String> header;
+                String head = "";
+                String line = "";
+                while((line=reader.readLine())!=null && line.length()!=0){
+                    head += line+"\r\n";
+                };
+                header = getHeaderLines(head);
+                logger.log("Client #" + clientNo + " | From: " + socket.getInetAddress().toString() + " | " + header.get("url") + header.toString());
+                //getHeaderLines(reader).forEach(System.out::println);
+                //Auth
+                //Do Stuff
+                //get response
+                Http res = HttpResponse.getResponse(encoding, header);
+                writer.write(res.getHead().getBytes(), 0, res.getHead().getBytes().length);
+                writer.flush();
+                writer.write(res.getPayload(), 0, res.getPayload().length);
+                writer.flush();
+            }
             // We're done with the connection → Close the socket
+
+
+        }  catch (NoSuchElementException e){
+
+        }  catch (SocketTimeoutException e) {
+
+        } finally {
             writer.close();
             reader.close();
             socket.close();
             this.closed = true;
+        }
 
-        } catch (Exception e) {
+        }  catch (Exception e) {
+            e.printStackTrace();
 
         } finally{
             logger.log("Client -" + clientNo + " exit!! ");
@@ -94,12 +117,10 @@ public class HttpThread extends Thread {
 //        return lines;
 //    }
 
-    private HashMap<String, String> getHeaderLines(BufferedReader reader) throws IOException {
-        Scanner scan = new Scanner(reader);
-        scan.useDelimiter(Pattern.compile("\r\n\r\n"));
-        String headerString = scan.next();
+    private HashMap<String, String> getHeaderLines(String head) throws IOException {
+
         HashMap<String,String> header = new HashMap<>();
-        for (String line : headerString.split("\r\n")){
+        for (String line : head.split("\r\n")){
             if (!line.contains(":")){
                 String[] parts = line.split(" ");
                 header.put("method",parts[0]);

@@ -14,7 +14,7 @@ public class HttpResponse {
 //        String authorization = header.get(?);
 
         if(requestUrl.equals("/")){
-            return HttpConstructor.getDefault();
+            return HttpConstructor.getFile("/index.html",header.get("Accept"));
         }else if(requestUrl.equals("/auth")){
             return HttpConstructor.getAuth();
         }else if(requestUrl.equals("/file")){

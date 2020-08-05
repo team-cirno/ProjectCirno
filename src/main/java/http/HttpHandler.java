@@ -22,6 +22,9 @@ public class HttpHandler implements Runnable{
 
     public static Logger logger;
 
+    static final int https = 0;
+
+
     public InetSocketAddress Address;
     public ServerSocket serverSocket;
 
@@ -101,7 +104,6 @@ public class HttpHandler implements Runnable{
     public ServerSocket getServerSocket(InetSocketAddress address)
             throws Exception {
 
-        int https = 0;
 
         if(https == 0){
             logger.log("Get HTTP ServerSocket");

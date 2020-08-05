@@ -74,7 +74,6 @@ public class HttpConstructor {
             e.printStackTrace();
         }
 
-
         int contentLength = body.length;
 
         String head = getFormat() +

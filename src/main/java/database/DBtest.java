@@ -20,6 +20,5 @@ public class DBtest {
         // Accessing the database
         MongoDatabase database = mongo.getDatabase("test");
         System.out.println("Credentials ::"+ credential);
-
     }
 }

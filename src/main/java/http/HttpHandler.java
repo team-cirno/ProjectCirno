@@ -22,7 +22,7 @@ public class HttpHandler implements Runnable{
 
     public static Logger logger;
 
-    static final int https = 0;
+    static final int https = 1;
 
 
     public InetSocketAddress Address;
@@ -115,7 +115,8 @@ public class HttpHandler implements Runnable{
         // 0 means that an implementation-specific default is used
         int backlog = 0;
         logger.log("Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore");
-        var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
+        //var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
+        var keyStorePath = Path.of("./ssl/nekohub.me.keystore");
         char[] keyStorePassword = "Nekohub!".toCharArray();
 
         // Bind the socket to the given port and address

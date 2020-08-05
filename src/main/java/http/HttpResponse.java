@@ -6,15 +6,16 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 
 public class HttpResponse {
 
-    public static Http getResponse(Charset encoding, HashMap<String,String> header) {
+    public static Http getResponse(Charset encoding, HashMap<String, String> header) {
         String requestUrl = header.get("url");
 //        String authorization = header.get(?);
 
         if(requestUrl.equals("/")){
-            return HttpConstructor.getFile("/index.html",header.get("Accept"));
+            return HttpConstructor.getFile("/index.html");
         }else if(requestUrl.equals("/auth")){
             return HttpConstructor.getAuth();
         }else if(requestUrl.equals("/file")){
@@ -29,7 +30,7 @@ public class HttpResponse {
             ServerMain.stop();
             return HttpConstructor.getStop();
         }else{
-            return HttpConstructor.getFile(requestUrl,header.get("Accept"));
+            return HttpConstructor.getFile(requestUrl);
         }
     }
 

@@ -4,13 +4,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -146,7 +140,7 @@ public class HttpConstructor {
                 "\r\n";
         return new Http(head, body);
     }
-    public static Http getFile(String filePath, String context){
+    public static Http getFile(String filePath){
 
         FileInputStream fis = null;
         BufferedInputStream bis = null;

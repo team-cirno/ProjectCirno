@@ -7,9 +7,8 @@ import com.mongodb.client.MongoDatabase;
 
 public class DBtest {
     public static void main(String[] args) {
-
         // Creating a Mongo client
-        MongoClient mongo = new MongoClient( "nekohub.me" , 27017 );
+        MongoClient mongo = new MongoClient( "10.0.0.16" , 27017 );
 
         // Creating Credentials
         MongoCredential credential;
@@ -20,5 +19,6 @@ public class DBtest {
         // Accessing the database
         MongoDatabase database = mongo.getDatabase("test");
         System.out.println("Credentials ::"+ credential);
+
     }
 }

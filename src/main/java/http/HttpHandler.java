@@ -22,6 +22,9 @@ public class HttpHandler implements Runnable{
 
     public static Logger logger;
 
+    static final int https = 1;
+
+
     public InetSocketAddress Address;
     public ServerSocket serverSocket;
 
@@ -101,7 +104,6 @@ public class HttpHandler implements Runnable{
     public ServerSocket getServerSocket(InetSocketAddress address)
             throws Exception {
 
-        int https = 0;
 
         if(https == 0){
             logger.log("Get HTTP ServerSocket");
@@ -113,7 +115,8 @@ public class HttpHandler implements Runnable{
         // 0 means that an implementation-specific default is used
         int backlog = 0;
         logger.log("Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore");
-        var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
+        //var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
+        var keyStorePath = Path.of("./ssl/nekohub.me.keystore");
         char[] keyStorePassword = "Nekohub!".toCharArray();
 
         // Bind the socket to the given port and address
@@ -170,7 +173,6 @@ public class HttpHandler implements Runnable{
                     break;
                 }
                 var socket = serverSocket.accept();
-
                 int alloc = -1;
                 for (int i = 0 ; i<threadPool.length;i++)
                 {

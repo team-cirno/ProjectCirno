@@ -1,5 +1,7 @@
 package http;
 
+import org.json.simple.JSONObject;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -189,6 +191,7 @@ public class HttpConstructor {
 
         return new Http(head,body);
     }
+
     public static Http getStop(){
         //Need generate random access code
         byte [] body = "Server Sutting Down\r\n".getBytes();
@@ -198,6 +201,24 @@ public class HttpConstructor {
                 format("Content-Length: %d\r\n", contentLength) +
                 format("Content-Type: %s\r\n",
                         "text/plain") +
+                // An empty line marks the end of the response's header
+                "\r\n";
+
+        return new Http(head,body);
+    }
+
+    public static Http poseUser(object.user.User user){
+        JSONObject bodyJson = new JSONObject();
+        bodyJson.put("firstName",user.getFirstName());
+        bodyJson.put("lastName",user.getLastName());
+
+        byte[] body = bodyJson.toString().getBytes();
+        int contentLength = body.length;
+
+        String head = getFormat() +
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n",
+                        "application/json") +
                 // An empty line marks the end of the response's header
                 "\r\n";
 

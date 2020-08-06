@@ -49,16 +49,16 @@ public class HttpThread extends Thread {
         logger.log("Client #"+clientNo+" Start");
         try{try {
             while (!this.closed) {
-                HashMap<String,String> header = new HashMap<String, String>();
+                HashMap<String,String> request = new HashMap<String, String>();
 
-                header = getHeader(reader);
+                request = parseRequest(reader);
 
-                logger.log("Client #" + clientNo + " | From: " + socket.getInetAddress().toString() + " | " + header.get("url") + " " + header.toString());
+                logger.log("Client #" + clientNo + " | From: " + socket.getInetAddress().toString() + " | " + request.get("url") + " " + request.toString());
                 //getHeaderLines(reader).forEach(System.out::println);
                 //Auth
                 //Do Stuff
                 //get response
-                Http res = HttpResponse.getResponse(encoding, header);
+                Http res = HttpResponse.getResponse(encoding, request);
                 writer.write(res.getHead().getBytes(), 0, res.getHead().getBytes().length);
                 writer.flush();
                 writer.write(res.getPayload(), 0, res.getPayload().length);
@@ -85,8 +85,8 @@ public class HttpThread extends Thread {
 
     }
 
-    private HashMap<String, String> getHeader(BufferedReader reader) {
-        HashMap<String,String> header = new HashMap<>();
+    private HashMap<String, String> parseRequest(BufferedReader reader) {
+        HashMap<String,String> request = new HashMap<>();
         var lines = new ArrayList<String>();
         String line = null;
         try {
@@ -98,23 +98,25 @@ public class HttpThread extends Thread {
 
                 if(!line.contains(":")){
                     String[] parts = line.split(" ");
-                    header.put("method",parts[0]);
+                    request.put("method",parts[0]);
                     if(parts[1].indexOf('?')>=0){
                         parts[1] = parts[1].substring(0,parts[1].indexOf('?'));
                     }
-                    header.put("url",parts[1]);
-                    header.put("httpVersion",parts[2]);
+                    request.put("url",parts[1]);
+                    request.put("httpVersion",parts[2]);
                 }else {
                     String[] pair = line.split(": ");
-                    header.put(pair[0], pair[1]);
+                    request.put(pair[0], pair[1]);
                 }
                 line = reader.readLine();
             }
+            request.put("body",reader.readLine());
+
         } catch (IOException ignored) {
 
         }
 
-        return header;
+        return request;
     }
 
     public void close(){

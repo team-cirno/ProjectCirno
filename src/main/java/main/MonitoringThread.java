@@ -22,6 +22,9 @@ public class MonitoringThread extends Thread {
         this.refreshInterval = refreshInterval;
 
         setName("MonitoringThread");
+        long[] threadid = new long[1];
+        threadid[0] = this.getId();
+        this.mapNewThreads(threadid);
 
         start();
     }

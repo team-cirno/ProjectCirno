@@ -9,10 +9,11 @@ public class ServerMain {
 
     public static Logger logger;
     static HttpHandler httpHandler;
+    static MonitoringThread monitoringThread;
 
 
     public ServerMain(){
-        MonitoringThread monitoringThread = new MonitoringThread(5*1000);
+        monitoringThread = new MonitoringThread(5*1000);
         logger = new Logger(this);
         logger.log("Creating Server Main");
         httpHandler = new HttpHandler("10.0.0.16", 2048);
@@ -28,6 +29,7 @@ public class ServerMain {
 
     public static void stop(){
         httpHandler.stop();
+        monitoringThread.stopMonitor();
     }
 
 }

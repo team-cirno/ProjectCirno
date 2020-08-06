@@ -23,66 +23,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9f8668d-a4b1-4e0f-87fd-69cdf76b7da8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/www/apple-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/css/app.325f2b15.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.03ef1918.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.5987dd12.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.b17a118e.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/fonts/nucleo.f0b489a5.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/anime3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/anime6.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/apple-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/bg5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/default-avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/emilyz.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/favicon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/android-chrome-192x192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/android-chrome-512x512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-120x120.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-152x152.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-180x180.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-60x60.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon-76x76.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/apple-touch-icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/favicon-16x16.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/favicon-32x32.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/msapplication-icon-144x144.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/mstile-150x150.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/icons/safari-pinned-tab.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/img_3115.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/james.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/img/mike.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/app.687e1e99.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/app.687e1e99.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/chunk-vendors.e57a0b99.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/chunk-vendors.e57a0b99.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/common.46ddfa99.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/common.46ddfa99.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/dashboard.a2bc5ebc.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/js/dashboard.a2bc5ebc.js.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/precache-manifest.2aade6961db6466ba891085c41e71283.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/www/service-worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/database/DBtest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/database/DBtest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/http/HttpConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/http/HttpConstructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/http/HttpResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/http/HttpResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/user/Student.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/user/Teacher.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/object/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/object/user/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/database/DBtest.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/database/DBtest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/http/HttpConstructor.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpConstructor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/http/HttpHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/http/HttpResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpResponse.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/http/HttpThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/http/HttpThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main/ServerMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/main/ServerMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/object/user/Student.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/object/user/Teacher.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/object/user/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/object/user/User.class" afterDir="false" />
     </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -111,6 +58,18 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
   </component>
   <component name="RunManager" selected="Application.ServerLauncher">
     <configuration name="DBtest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -146,7 +105,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -158,6 +117,7 @@
       <option name="presentableId" value="Default" />
       <updated>1596311949366</updated>
       <workItem from="1596488685229" duration="2786000" />
+      <workItem from="1596573393048" duration="516000" />
     </task>
     <servers />
   </component>
@@ -169,12 +129,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

@@ -12,6 +12,7 @@ public class ServerMain {
 
 
     public ServerMain(){
+        MonitoringThread monitoringThread = new MonitoringThread(5*1000);
         logger = new Logger(this);
         logger.log("Creating Server Main");
         httpHandler = new HttpHandler("10.0.0.16", 2048);

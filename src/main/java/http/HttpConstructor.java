@@ -1,6 +1,7 @@
 package http;
 
 
+import logger.Logger;
 import org.json.simple.JSONObject;
 
 import java.io.*;
@@ -14,6 +15,8 @@ import java.util.TimeZone;
 import static java.lang.String.format;
 
 public class HttpConstructor {
+
+    public static Logger logger = new Logger(new HttpConstructor());
 
     public static String AccessControl =
             "Access-Control-Allow-Origin: *\r\n" +
@@ -208,7 +211,10 @@ public class HttpConstructor {
         return new Http(head,body);
     }
 
-    public static Http poseUser(object.user.User user){
+    public static Http postUser(object.user.User user){
+        logger.log("State build http request");
+        logger.log(user.getFirstName());
+        logger.log(user.getLastName());
         JSONObject bodyJson = new JSONObject();
         bodyJson.put("firstName",user.getFirstName());
         bodyJson.put("lastName",user.getLastName());
@@ -222,7 +228,7 @@ public class HttpConstructor {
                         "application/json") +
                 // An empty line marks the end of the response's header
                 "\r\n";
-
+        logger.log("Finish build http request");
         return new Http(head,body);
     }
 

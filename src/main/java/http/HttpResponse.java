@@ -1,6 +1,7 @@
 package http;
 
 import main.ServerMain;
+import object.user.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -31,7 +32,7 @@ public class HttpResponse {
         } else if (requestUrl.equals("/favicon.ico")) {
             return HttpConstructor.getIcon();
         } else if (requestUrl.equals("/profile")) {
-            return HttpConstructor.getIcon();
+            return HttpConstructor.postUser(curUser);
         } else if (requestUrl.equals("/stop")) {
             ServerMain.stop();
             return HttpConstructor.getStop();
@@ -46,13 +47,11 @@ public class HttpResponse {
                 String bodyString = request.get("body");
                 JSONParser parser = new JSONParser();
                 JSONObject body = (JSONObject) parser.parse(bodyString);
-                curUser = new object.user.User((String) body.get("firstname"), (String) body.get("lastName"), (String) body.get("nickName"), (String) body.get("userName"), (String) body.get("eMail"), UUID.fromString((String) body.get("uuid")));
+                curUser = new User(body.get("firstname").toString(),body.get("lastName").toString(),body.get("nickName").toString(), (String) body.get("userName"), body.get("eMail").toString(), UUID.fromString(body.get("uuid").toString()));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
             return HttpConstructor.getDefault();
-        } else if (request.get("url").equals("/profile")) {
-            return HttpConstructor.poseUser(curUser);
         }
         return HttpConstructor.getDefault();
     }

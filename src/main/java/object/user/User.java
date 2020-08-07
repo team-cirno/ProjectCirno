@@ -13,6 +13,7 @@ public class User {
     UUID uuid;
 
     public User(String firstName, String lastName, String nickName, String userName, String eMail, UUID uuid) {
+        System.out.println("Strat to creat user");
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickName = nickName;

@@ -49,16 +49,17 @@ public class HttpThread extends Thread {
         logger.log("Client #"+clientNo+" Start");
         try{try {
             while (!this.closed) {
-                HashMap<String,String> request = new HashMap<String, String>();
-
-                request = parseRequest(reader);
+                HashMap<String,String> request = parseRequest(reader);
 
                 logger.log("Client #" + clientNo + " | From: " + socket.getInetAddress().toString() + " | " + request.get("url") + " " + request.toString());
-                //getHeaderLines(reader).forEach(System.out::println);
-                //Auth
-                //Do Stuff
-                //get response
-                Http res = HttpResponse.getResponse(encoding, request);
+                Http res;
+
+                if(request.get("method").equals("GET")){
+                    res = HttpResponse.getResponse(encoding, request);
+                }
+                else{
+                    res = HttpResponse.poseResponse(request);
+                }
                 writer.write(res.getHead().getBytes(), 0, res.getHead().getBytes().length);
                 writer.flush();
                 writer.write(res.getPayload(), 0, res.getPayload().length);
@@ -95,7 +96,6 @@ public class HttpThread extends Thread {
             while (!line.isEmpty()) {
 
                 lines.add(line);
-
                 if(!line.contains(":")){
                     String[] parts = line.split(" ");
                     request.put("method",parts[0]);
@@ -109,8 +109,16 @@ public class HttpThread extends Thread {
                     request.put(pair[0], pair[1]);
                 }
                 line = reader.readLine();
+
             }
-            request.put("body",reader.readLine());
+
+            line = reader.readLine();
+            String body = "";
+            while (!line.isEmpty()) {
+                body += line.trim().replace(" ","");
+                line = reader.readLine();
+            }
+            request.put("body",body);
 
         } catch (IOException ignored) {
 

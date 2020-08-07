@@ -18,6 +18,8 @@ public class MonitoringThread extends Thread {
     private ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
     private OperatingSystemMXBean opBean = ManagementFactory.getOperatingSystemMXBean();
 
+    static double[] cpuLoad;
+
     public MonitoringThread(long refreshInterval) {
         this.refreshInterval = refreshInterval;
 
@@ -110,6 +112,14 @@ public class MonitoringThread extends Thread {
 
     public double getAvarageUsagePerCPU() {
         return getTotalUsage() / opBean.getAvailableProcessors();
+    }
+
+    public static double[] getCPULoad() {
+        double[] res =new double[12];
+        for(int i = 0;i<12;i++){
+            res[i] = i;
+        }
+        return res;
     }
 
     public double getUsageByThread(Thread t) {

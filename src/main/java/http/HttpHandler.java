@@ -201,7 +201,7 @@ public class HttpHandler extends Thread{
 
         for (int i = 0 ; i<threadPool.length;i++)
         {
-            if(threadPool[i] != null&& !threadPool[i].isClosed()){
+            if(threadPool[i] != null && !threadPool[i].isClosed()){
                 threadPool[i].close();
                 threadPool[i].interrupt();
                 threadPool[i].stop();

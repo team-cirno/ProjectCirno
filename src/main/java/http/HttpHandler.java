@@ -22,7 +22,7 @@ public class HttpHandler implements Runnable{
 
     public static Logger logger;
 
-    static final int https = 1;
+    static final int https = 0;
 
 
     public InetSocketAddress Address;

@@ -1,17 +1,16 @@
 package http;
 
-import com.mongodb.util.JSON;
 import main.ServerMain;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.UUID;
 
-import org.json.*;
-import org.json.simple.*;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+
 
 public class HttpResponse {
 

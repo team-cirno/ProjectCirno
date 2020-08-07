@@ -8,7 +8,8 @@ public class Queue {
     private int count = 0;
     private int limit = 30;
 
-    public Queue() {
+    public Queue(int limit) {
+        this.limit = limit;
     }
 
     public int getCount() {

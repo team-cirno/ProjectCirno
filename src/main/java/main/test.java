@@ -3,32 +3,51 @@ package main;
 import com.sun.management.OperatingSystemMXBean;
 
 import javax.management.ObjectName;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.lang.management.ManagementFactory;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Collections;
+import java.util.Enumeration;
+import static java.lang.System.out;
+
 
 public class test {
-    public static void main(String[] args) {
-        OperatingSystemMXBean mbean = (com.sun.management.OperatingSystemMXBean)
-                ManagementFactory.getOperatingSystemMXBean();
-        double load;
-        for(int i=0; i<10; i++) {
-            load = mbean.getProcessCpuLoad();
-            if((load<0.0 || load>1.0) && load != -1.0) {
-                throw new RuntimeException("getProcessCpuLoad() returns " + load
-                        +   " which is not in the [0.0,1.0] interval");
+    public static void main(String args[]) throws SocketException {
+        out.println(getNetworkUsageKb());
+    }
+
+    public static long[] getNetworkUsageKb() {
+        BufferedReader reader;
+        String line;
+        String[] values;
+        long[] totalBytes = new long[2];//rx,tx
+        try {
+            reader = new BufferedReader(new FileReader("/proc/net/dev"));
+
+            while ((line = reader.readLine()) != null) {
+                if (line.contains("eth") || line.contains("wlan")){
+                    values = line.trim().split("\\s+");
+                    totalBytes[0] +=Long.parseLong(values[1]);//rx
+                    totalBytes[1] +=Long.parseLong(values[9]);//tx
+                }
             }
-            try {
-                Thread.sleep(200);
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            }
-            System.out.print("Ps CPU load   ");
-            System.out.println(load);
-            System.out.print(" CPU load     ");
-            System.out.println(mbean.getCpuLoad());
-            System.out.print(" ram load     ");
-            System.out.println(mbean.getTotalPhysicalMemorySize()/1024/1024/1024);
-            System.out.print("free ram load ");
-            System.out.println(mbean.getFreePhysicalMemorySize()/1024/1024);
+            reader.close();
         }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //transfer to kb
+        totalBytes[0] =  totalBytes[0] / 1024;
+        totalBytes[1] =  totalBytes[1] / 1024;
+
+        return totalBytes;
     }
 }

@@ -1,6 +1,7 @@
 package http;
 
 import logger.Logger;
+import main.ServerMain;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -18,7 +19,7 @@ import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class HttpHandler implements Runnable{
+public class HttpHandler extends Thread{
 
     public static Logger logger;
 
@@ -63,6 +64,9 @@ public class HttpHandler implements Runnable{
             e.printStackTrace();
         }
         threadPool = new HttpThread[20];
+        for(int i=0; i<threadPool.length;i++){
+            threadPool[i]=null;
+        }
 
         logger.log("Creating ThreadPool with cap of 8");
     }
@@ -75,26 +79,10 @@ public class HttpHandler implements Runnable{
         startMultiThreaded(Address);
     }
 
-    public void stop() {
+    public void shutdown() {
         logger.log("Shutting Down HttpHandler...");
         setIsLive(false);
 
-        if (serverSocket!=null&& !serverSocket.isClosed()) {
-            try {
-                serverSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        for (int i = 0 ; i<threadPool.length;i++)
-        {
-            if(threadPool[i] != null || !threadPool[i].isClosed()){
-                threadPool[i].close();
-                threadPool[i].interrupt();
-                threadPool[i].stop();
-            };
-        }
 
         logger.log("Shutting Down HttpHandler... Done.");
 
@@ -178,6 +166,7 @@ public class HttpHandler implements Runnable{
                 {
                     if(threadPool[i] == null || threadPool[i].isClosed()){
                         HttpThread var = new HttpThread(socket, i);
+                        ServerMain.setthreadCount(1);
                         var.start();
                         threadPool[i]=var;
                         counter +=1;
@@ -199,6 +188,24 @@ public class HttpHandler implements Runnable{
                 System.err.println("Exception while handling connection");
                 e.printStackTrace();
             }
+        }
+
+
+        if (serverSocket!=null&& !serverSocket.isClosed()) {
+            try {
+                serverSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        for (int i = 0 ; i<threadPool.length;i++)
+        {
+            if(threadPool[i] != null&& !threadPool[i].isClosed()){
+                threadPool[i].close();
+                threadPool[i].interrupt();
+                threadPool[i].stop();
+            };
         }
     }
 }

@@ -1,6 +1,7 @@
 package http;
 
 import logger.Logger;
+import main.ServerMain;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -81,6 +82,7 @@ public class HttpThread extends Thread {
         }  catch (Exception ignored) {
 
         } finally{
+            ServerMain.setthreadCount(-1);
             logger.log("Client -" + clientNo + " exit!! ");
         }
 

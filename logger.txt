@@ -18,3 +18,68 @@
 [2020-08-02 04:01:36.71]	HttpThread	-Client #1 | From: /0:0:0:0:0:0:0:1 | [GET /stop HTTP/1.1, Host: localhost:2048, Connection: keep-alive, Upgrade-Insecure-Requests: 1, User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36, Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9, Purpose: prefetch, Sec-Fetch-Site: none, Sec-Fetch-Mode: navigate, Sec-Fetch-User: ?1, Sec-Fetch-Dest: document, Accept-Encoding: gzip, deflate, br, Accept-Language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,zh-TW;q=0.6]
 [2020-08-02 04:01:36.71]	HttpHandler	-Shutting Down HttpHandler...
 [2020-08-02 04:01:36.711]	HttpHandler	-Find server closed
+[2020-08-08 03:46:13.598]	ServerLauncher	-Starting Launch Process...
+[2020-08-08 03:46:13.618]	ServerMain	-Creating Server Main
+[2020-08-08 03:46:13.631]	HttpHandler	-Creating HTTP hander Address: 10.0.0.40 | Port: 2048
+[2020-08-08 03:46:13.631]	HttpHandler	-Get HTTPs ServerSocket
+[2020-08-08 03:46:13.631]	HttpHandler	-Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore
+[2020-08-08 03:46:14.006]	HttpHandler	-HTTPs success
+[2020-08-08 03:46:14.007]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-08-08 03:46:14.018]	HttpHandler	-HttpHandler run...
+[2020-08-08 03:46:14.019]	HttpHandler	-Starting multi-threaded server at /10.0.0.40:2048
+[2020-08-08 03:46:14.02]	HttpHandler	-Listening at address:Address: /10.0.0.40:2048 | Port: 2048
+[2020-08-08 03:46:17.044]	HttpHandler	-Shutting Down HttpHandler...
+[2020-08-08 03:46:17.044]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-08-08 03:55:02.349]	ServerLauncher	-Starting Launch Process...
+[2020-08-08 03:55:02.368]	ServerMain	-Creating Server Main
+[2020-08-08 03:55:02.381]	HttpHandler	-Creating HTTP hander Address: 10.0.0.40 | Port: 2048
+[2020-08-08 03:55:02.381]	HttpHandler	-Get HTTPs ServerSocket
+[2020-08-08 03:55:02.381]	HttpHandler	-Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore
+[2020-08-08 03:55:02.771]	HttpHandler	-HTTPs success
+[2020-08-08 03:55:02.771]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-08-08 03:55:02.786]	HttpHandler	-HttpHandler run...
+[2020-08-08 03:55:02.787]	HttpHandler	-Starting multi-threaded server at /10.0.0.40:2048
+[2020-08-08 03:55:02.788]	HttpHandler	-Listening at address:Address: /10.0.0.40:2048 | Port: 2048
+[2020-08-08 03:55:08.235]	HttpHandler	-Shutting Down HttpHandler...
+[2020-08-08 03:55:08.235]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-08-08 03:55:31.104]	ServerLauncher	-Starting Launch Process...
+[2020-08-08 03:55:31.123]	ServerMain	-Creating Server Main
+[2020-08-08 03:55:31.13]	HttpHandler	-Creating HTTP hander Address: 10.0.0.40 | Port: 2048
+[2020-08-08 03:55:31.13]	HttpHandler	-Get HTTPs ServerSocket
+[2020-08-08 03:55:31.13]	HttpHandler	-Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore
+[2020-08-08 03:55:31.512]	HttpHandler	-HTTPs success
+[2020-08-08 03:55:31.512]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-08-08 03:55:31.527]	HttpHandler	-HttpHandler run...
+[2020-08-08 03:55:31.527]	HttpHandler	-Starting multi-threaded server at /10.0.0.40:2048
+[2020-08-08 03:55:31.528]	HttpHandler	-Listening at address:Address: /10.0.0.40:2048 | Port: 2048
+[2020-08-08 03:55:57.805]	HttpHandler	-Alloc in thread #0
+[2020-08-08 03:55:57.805]	HttpThread	-Client #0 Start
+[2020-08-08 03:55:57.964]	HttpThread	-Client #0 | From: /10.0.0.40 | /profile {httpVersion=HTTP/1.1, method=GET, Accept=*/*, User-Agent=PostmanRuntime/7.26.2, Connection=keep-alive, Postman-Token=4b5f3122-b406-47b1-a1e2-825c5bfe1f37, Host=10.0.0.40:2048, Accept-Encoding=gzip, deflate, br, Content-Length=179, body={"firstname":"lol","lastName":"lel","nickName":"lil","userName":"lpl","uuid":"123e4567-e89b-12d3-a456-556642440000","eMail":"Haha"}, url=/profile, Content-Type=text/plain}
+[2020-08-08 03:55:57.984]	HttpConstructor	-State build http request
+[2020-08-08 03:55:58.004]	HttpThread	-Client -0 exit!! 
+[2020-08-08 03:56:05.387]	HttpHandler	-Shutting Down HttpHandler...
+[2020-08-08 03:56:05.387]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-08-08 03:56:23.621]	ServerLauncher	-Starting Launch Process...
+[2020-08-08 03:56:23.659]	ServerMain	-Creating Server Main
+[2020-08-08 03:56:23.752]	HttpHandler	-Creating HTTP hander Address: 10.0.0.40 | Port: 2048
+[2020-08-08 03:56:23.756]	HttpHandler	-Get HTTPs ServerSocket
+[2020-08-08 03:56:23.756]	HttpHandler	-Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore
+[2020-08-08 03:56:24.161]	HttpHandler	-HTTPs success
+[2020-08-08 03:56:24.162]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-08-08 03:56:24.176]	HttpHandler	-HttpHandler run...
+[2020-08-08 03:56:24.177]	HttpHandler	-Starting multi-threaded server at /10.0.0.40:2048
+[2020-08-08 03:56:24.178]	HttpHandler	-Listening at address:Address: /10.0.0.40:2048 | Port: 2048
+[2020-08-08 03:56:28.154]	HttpHandler	-Shutting Down HttpHandler...
+[2020-08-08 03:56:28.154]	HttpHandler	-Shutting Down HttpHandler... Done.
+[2020-08-08 03:58:30.819]	ServerLauncher	-Starting Launch Process...
+[2020-08-08 03:58:30.838]	ServerMain	-Creating Server Main
+[2020-08-08 03:58:30.852]	HttpHandler	-Creating HTTP hander Address: 10.0.0.40 | Port: 2048
+[2020-08-08 03:58:30.852]	HttpHandler	-Get HTTPs ServerSocket
+[2020-08-08 03:58:30.852]	HttpHandler	-Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore
+[2020-08-08 03:58:31.236]	HttpHandler	-HTTPs success
+[2020-08-08 03:58:31.236]	HttpHandler	-Creating ThreadPool with cap of 8
+[2020-08-08 03:58:31.251]	HttpHandler	-HttpHandler run...
+[2020-08-08 03:58:31.252]	HttpHandler	-Starting multi-threaded server at /10.0.0.40:2048
+[2020-08-08 03:58:31.253]	HttpHandler	-Listening at address:Address: /10.0.0.40:2048 | Port: 2048
+[2020-08-08 03:58:34.238]	HttpHandler	-Shutting Down HttpHandler...
+[2020-08-08 03:58:34.239]	HttpHandler	-Shutting Down HttpHandler... Done.

@@ -1,7 +1,7 @@
 package main;
 
 import java.lang.management.ManagementFactory;
-import java.lang.management.OperatingSystemMXBean;
+import com.sun.management.OperatingSystemMXBean;
 import java.lang.management.ThreadMXBean;
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,9 +16,11 @@ public class MonitoringThread extends Thread {
 
     private Map<Long, ThreadTime> threadTimeMap = new HashMap<Long, ThreadTime>();
     private ThreadMXBean threadBean = ManagementFactory.getThreadMXBean();
-    private OperatingSystemMXBean opBean = ManagementFactory.getOperatingSystemMXBean();
+    OperatingSystemMXBean mont;
 
-    static double[] cpuLoad;
+    Queue cpuLoad;
+    Queue ramLoad;
+    Queue netLoad;
 
     public MonitoringThread(long refreshInterval) {
         this.refreshInterval = refreshInterval;
@@ -27,34 +29,20 @@ public class MonitoringThread extends Thread {
         long[] threadid = new long[1];
         threadid[0] = this.getId();
         this.mapNewThreads(threadid);
-
-        start();
+        cpuLoad = new Queue(12);
+        ramLoad = new Queue(12);
+        netLoad = new Queue(12);
+        mont = (com.sun.management.OperatingSystemMXBean)
+                ManagementFactory.getOperatingSystemMXBean();
     }
 
     @Override
     public void run() {
         while(!stopped) {
-            Set<Long> mappedIds;
-            synchronized (threadTimeMap) {
-                mappedIds = new HashSet<Long>(threadTimeMap.keySet());
-            }
 
-            long[] allThreadIds = threadBean.getAllThreadIds();
-
-            removeDeadThreads(mappedIds, allThreadIds);
-
-            mapNewThreads(allThreadIds);
-
-            Collection<ThreadTime> values;
-            synchronized (threadTimeMap) {
-                values = new HashSet<ThreadTime>(threadTimeMap.values());
-            }
-
-            for (ThreadTime threadTime : values) {
-                synchronized (threadTime) {
-                    threadTime.setCurrent(threadBean.getThreadCpuTime(threadTime.getId()));
-                }
-            }
+            cpuLoad.enqueue(mont.getCpuLoad());
+            ramLoad.enqueue(mont.getTotalPhysicalMemorySize()-mont.getFreeMemorySize());
+            netLoad.enqueue(0);
 
             try {
                 Thread.sleep(refreshInterval);
@@ -62,11 +50,6 @@ public class MonitoringThread extends Thread {
                 throw new RuntimeException(e);
             }
 
-            for (ThreadTime threadTime : values) {
-                synchronized (threadTime) {
-                    threadTime.setLast(threadTime.getCurrent());
-                }
-            }
         }
     }
 
@@ -91,7 +74,7 @@ public class MonitoringThread extends Thread {
         }
     }
 
-    public void stopMonitor() {
+    public void shutdown() {
         this.stopped = true;
     }
 
@@ -105,33 +88,6 @@ public class MonitoringThread extends Thread {
         for (ThreadTime threadTime : values) {
             synchronized (threadTime) {
                 usage += (threadTime.getCurrent() - threadTime.getLast()) / (refreshInterval * 10000);
-            }
-        }
-        return usage;
-    }
-
-    public double getAvarageUsagePerCPU() {
-        return getTotalUsage() / opBean.getAvailableProcessors();
-    }
-
-    public static double[] getCPULoad() {
-        double[] res =new double[12];
-        for(int i = 0;i<12;i++){
-            res[i] = i;
-        }
-        return res;
-    }
-
-    public double getUsageByThread(Thread t) {
-        ThreadTime info;
-        synchronized (threadTimeMap) {
-            info = threadTimeMap.get(t.getId());
-        }
-
-        double usage = 0D;
-        if(info != null) {
-            synchronized (info) {
-                usage = (info.getCurrent() - info.getLast()) / (refreshInterval * 10000);
             }
         }
         return usage;

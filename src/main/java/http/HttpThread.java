@@ -88,14 +88,12 @@ public class HttpThread extends Thread {
 
     private HashMap<String, String> parseRequest(BufferedReader reader) {
         HashMap<String,String> request = new HashMap<>();
-        var lines = new ArrayList<String>();
-        String line = null;
+
         try {
+            String line = null;
             line = reader.readLine();
             // An empty line marks the end of the request's header
             while (!line.isEmpty()) {
-
-                lines.add(line);
                 if(!line.contains(":")){
                     String[] parts = line.split(" ");
                     request.put("method",parts[0]);

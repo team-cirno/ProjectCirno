@@ -1,0 +1,8 @@
+{
+  "address": "10.0.0.40",
+  "port": 2048,
+  "https": 1,
+  "keyStorePath": "/home/neko/neko_server/ssl/nekohub.me.keystore",
+  "keyStorePassword": "Nekohub!",
+  "serverName": "Crino"
+}

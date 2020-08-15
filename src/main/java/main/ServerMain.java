@@ -2,7 +2,10 @@ package main;
 
 import http.HttpHandler;
 import logger.Logger;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import java.io.FileReader;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -19,7 +22,16 @@ public class ServerMain {
 
         logger = new Logger(this);
         logger.log("Creating Server Main");
-        httpHandler = new HttpHandler("10.0.0.40", 2048);
+
+        JSONParser parser = new JSONParser();
+        try{
+            Object obj = parser.parse(new FileReader("./server.json"));
+            JSONObject jb = (JSONObject)obj;
+            httpHandler = new HttpHandler(jb.get("address").toString(), (int)jb.get("port"));
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         threadCount = 0;
         monitoringThread = new MonitoringThread(5*1000);
 

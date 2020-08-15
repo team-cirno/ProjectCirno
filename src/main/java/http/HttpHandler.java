@@ -2,6 +2,8 @@ package http;
 
 import logger.Logger;
 import main.ServerMain;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
@@ -22,8 +24,6 @@ import java.util.concurrent.TimeUnit;
 public class HttpHandler extends Thread{
 
     public static Logger logger;
-
-    static final int https = 1;
 
 
     public InetSocketAddress Address;
@@ -89,23 +89,32 @@ public class HttpHandler extends Thread{
     }
 
 
-    public ServerSocket getServerSocket(InetSocketAddress address)
-            throws Exception {
+    public ServerSocket getServerSocket(InetSocketAddress address) throws Exception {
 
+        JSONParser parser = new JSONParser();
+        JSONObject jb = null;
+        try{
+            Object obj = parser.parse(new FileReader("./server.json"));
+            jb = (JSONObject)obj;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
 
+        int https = (int)jb.get("https");
         if(https == 0){
             logger.log("Get HTTP ServerSocket");
             logger.log("HTTP success");
-            return new ServerSocket(2048);
+            return new ServerSocket((int)jb.get("port"));
         }
+
         logger.log("Get HTTPs ServerSocket");
         // Backlog is the maximum number of pending connections on the socket,
         // 0 means that an implementation-specific default is used
         int backlog = 0;
         logger.log("Get keystore at location => /home/neko/neko_server/ssl/nekohub.me.keystore");
         //var keyStorePath = Path.of("/home/neko/neko_server/ssl/nekohub.me.keystore");
-        var keyStorePath = Path.of("./ssl/nekohub.me.keystore");
-        char[] keyStorePassword = "Nekohub!".toCharArray();
+        var keyStorePath = Path.of(jb.get("keyStorePath").toString());
+        char[] keyStorePassword = jb.get("keyStorePassword").toString().toCharArray();
 
         // Bind the socket to the given port and address
         var serverSocket = getSslContext(keyStorePath, keyStorePassword)

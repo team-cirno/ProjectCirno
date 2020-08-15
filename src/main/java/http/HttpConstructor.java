@@ -3,11 +3,13 @@ package http;
 
 import logger.Logger;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -26,10 +28,32 @@ public class HttpConstructor {
             "Access-Control-Max-Age: 3600\r\n";
 
     public static String getFormat(){
-
+        JSONParser parser = new JSONParser();
+        JSONObject jb = null;
+        try{
+            Object obj = parser.parse(new FileReader("./server.json"));
+            jb = (JSONObject)obj;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         return "HTTP/1.1 200 OK\r\n" +
                 format("Date: %s\r\n", getServerTime()) +
-                format("Server: %s\r\n", "Crino") +
+                format("Server: %s\r\n", jb.get("serverName")) +
+                AccessControl;
+    }
+
+    public static String getPartialFormat(){
+        JSONParser parser = new JSONParser();
+        JSONObject jb = null;
+        try{
+            Object obj = parser.parse(new FileReader("./server.json"));
+            jb = (JSONObject)obj;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return "HTTP/1.1 206 Partial Content\r\n" +
+                format("Date: %s\r\n", getServerTime()) +
+                format("Server: %s\r\n", jb.get("serverName")) +
                 AccessControl;
     }
 
@@ -83,11 +107,9 @@ public class HttpConstructor {
                 // An empty line marks the end of the response's header
                 "\r\n";
 
-
         return new Http(head, body);
     }
     public static Http getIcon(){
-
 
         FileInputStream fis = null;
         BufferedInputStream bis = null;
@@ -119,7 +141,6 @@ public class HttpConstructor {
 
     public static Http getMP4(){
 
-
         FileInputStream fis = null;
         BufferedInputStream bis = null;
 
@@ -134,7 +155,6 @@ public class HttpConstructor {
             e.printStackTrace();
         }
 
-
         int contentLength = body.length;
 
         String head = getFormat() +
@@ -146,6 +166,51 @@ public class HttpConstructor {
                 "\r\n";
         return new Http(head, body);
     }
+
+    public static Http getContentRange(){
+        File myFile = new File("./test_video.mp4");
+        int contentLength = (int)myFile.length();
+        byte[] body = null;
+
+        String head = getPartialFormat()+
+                format("Content-Length: %d\r\n", 0) +
+                format("Content-Type: %s\r\n", "video/mpeg4") +
+                "Content-Disposition: inline; name=\"test_video\"; " +
+                format("filename=\"test_video.mp4\"\r\n") +
+                format("Content-Range: bytes 0-%d\r\n",contentLength)+
+                // An empty line marks the end of the response's header
+                "\r\n";
+        return new Http(head, body);
+    }
+
+    public static Http getMP4Partial(int start, int end){
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+
+        File myFile = new File("./test_video.mp4");
+        byte [] body  = new byte [(int)myFile.length()];
+        try {
+            fis = new FileInputStream(myFile);
+            bis = new BufferedInputStream(fis);
+            bis.read(body,0,body.length);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        int contentLength = end-start;
+
+        String head = getPartialFormat()+
+                format("Content-Length: %d\r\n", contentLength) +
+                format("Content-Type: %s\r\n", "video/mpeg4") +
+                "Content-Disposition: inline; name=\"test_video\"; " +
+                format("filename=\"test_video.mp4\"\r\n") +
+                format("Content-Range: bytes %d-%d\r\n",start,end)+
+        // An empty line marks the end of the response's header
+        "\r\n";
+        return new Http(head, Arrays.copyOfRange(body, start, end));
+    }
+
     public static Http getFile(String filePath){
 
         FileInputStream fis = null;
@@ -211,7 +276,7 @@ public class HttpConstructor {
         return new Http(head,body);
     }
 
-    public static Http postUser(object.user.User user){
+    public static Http getUser(object.user.User user){
         logger.log("State build http request");
         logger.log(user.getFirstName());
         logger.log(user.getLastName());

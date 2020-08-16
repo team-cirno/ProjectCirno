@@ -59,19 +59,21 @@ public class HttpResponse {
                     return HttpConstructor.getFile(header.get("url"));
                 }else{
                     //request with content range
+                    int start;
+                    int end;
                     Pattern p = Pattern.compile("\\d+");
                     Matcher m = p.matcher(header.get("Range"));
                     if(m.find()){
-                        int start = Integer.parseInt(m.group());
+                        start = Integer.parseInt(m.group());
                     } else{
                         return HttpConstructor.get416();
                     }
                     if(m.find()) {
-                        int end = Integer.parseInt(m.group());
+                        end = Integer.parseInt(m.group());
                     }else{
-                        int end = null;
+                        end = -1;
                     }
-                    return HttpConstructor.getMP4Partial(start,end);
+                    return HttpConstructor.getFilePartial(header.get("url"),start,end);
                 }
         }
     }

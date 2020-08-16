@@ -55,7 +55,8 @@ public class HttpConstructor {
         return "HTTP/1.1 206 Partial Content\r\n" +
                 format("Date: %s\r\n", getServerTime()) +
                 format("Server: %s\r\n", jb.get("serverName")) +
-                AccessControl;
+                AccessControl+
+                "Accept-Ranges: bytes\r\n";
     }
 
     static String getServerTime() {
@@ -168,12 +169,21 @@ public class HttpConstructor {
         return new Http(head, body);
     }
 
-    public static Http getMP4Partial(int start, int end){
+    public static Http getFilePartial(String filePath, int start, int end){
         FileInputStream fis = null;
         BufferedInputStream bis = null;
 
-        File myFile = new File("./test_video.mp4");
-        byte [] body  = new byte [(int)myFile.length()];
+        Path path = new File("./www"+filePath).toPath();
+        String mimeType = null;
+        try {
+            mimeType = Files.probeContentType(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        File myFile = new File("./www"+filePath);
+        int fileLength = (int)myFile.length();
+        byte [] body  = new byte [fileLength];
         try {
             fis = new FileInputStream(myFile);
             bis = new BufferedInputStream(fis);
@@ -183,17 +193,27 @@ public class HttpConstructor {
             e.printStackTrace();
         }
 
-        int contentLength = end-start;
+        int interval = 100;
+        if (start>fileLength || end>fileLength || start>=end){
+            return get416();
+        }else if(end == -1 || end-start>interval){
+            end = start + interval;
+        }
 
-        String head = getPartialFormat()+
+        int contentLength = end-start;
+        String head = getPartialFormat() +
                 format("Content-Length: %d\r\n", contentLength) +
-                format("Content-Type: %s\r\n", "video/mpeg4") +
-                "Content-Disposition: inline; name=\"test_video\"; " +
-                format("filename=\"test_video.mp4\"\r\n") +
+                format("Content-Type: %s\r\n", mimeType) +
                 format("Content-Range: bytes %d-%d\r\n",start,end)+
-        // An empty line marks the end of the response's header
-        "\r\n";
+                // An empty line marks the end of the response's header
+                "\r\n";
         return new Http(head, Arrays.copyOfRange(body, start, end));
+    }
+
+    public  static Http get416(){
+        String head = "HTTP/1.1 416 Range Not Satisfiable";
+        byte[] body = null;
+        return new Http(head,body);
     }
 
     public static Http getFile(String filePath){

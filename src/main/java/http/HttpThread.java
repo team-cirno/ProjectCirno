@@ -65,6 +65,8 @@ public class HttpThread extends Thread {
                 writer.flush();
                 writer.write(res.getPayload(), 0, res.getPayload().length);
                 writer.flush();
+                if(request.get("Connection") == null || request.get("Connection").equals("close"))
+                    this.closed = true;
                 //break;
             }
             // We're done with the connection → Close the socket
@@ -79,8 +81,9 @@ public class HttpThread extends Thread {
             this.closed = true;
         }
 
-        }  catch (Exception ignored) {
-
+        }  catch (Exception e) {
+            if(Logger.debugMode == 1)
+                e.printStackTrace();
         } finally{
             ServerMain.setthreadCount(-1);
             logger.log("Client -" + clientNo + " exit!! ");
@@ -96,11 +99,14 @@ public class HttpThread extends Thread {
             line = reader.readLine();
             // An empty line marks the end of the request's header
             while (!line.isEmpty()) {
+                logger.log("=>"+line);
                 if(!line.contains(":")){
                     String[] parts = line.split(" ");
                     request.put("method",parts[0]);
                     if(parts[1].indexOf('?')>=0){
                         parts[1] = parts[1].substring(0,parts[1].indexOf('?'));
+                        if(parts[1].indexOf('?')>=0)
+                            request.put("keyWord", parts[1].substring(parts[1].indexOf('?')));
                     }
                     request.put("url",parts[1]);
                     request.put("httpVersion",parts[2]);
@@ -111,7 +117,8 @@ public class HttpThread extends Thread {
                 line = reader.readLine();
 
             }
-
+            if(request.get("method").equals("GET"))
+                return request;
             line = reader.readLine();
             String body = "";
             while (!line.isEmpty()) {
@@ -120,9 +127,9 @@ public class HttpThread extends Thread {
             }
             request.put("body",body);
 
-        } catch (IOException ignored) {
-
-        }
+        } catch (IOException e) {
+            if(Logger.debugMode == 1)
+                e.printStackTrace();        }
 
         return request;
     }

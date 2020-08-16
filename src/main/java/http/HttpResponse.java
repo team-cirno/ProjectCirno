@@ -45,11 +45,19 @@ public class HttpResponse {
                 return HttpConstructor.getFile("/index.html");
             case "/auth":
                 return HttpConstructor.getAuth();
-            case "/file":
-                if(header.get("Range").equals("")) {
-                    //get file
-                    return HttpConstructor.getMP4();
-                }else if(header.get("Range").equals("bytes=0-")){
+            case "/image":
+                return HttpConstructor.getJpg();
+            case "/favicon.ico":
+                return HttpConstructor.getIcon();
+            case "/profile":
+                return HttpConstructor.getUser(curUser);
+            case "/stop":
+                ServerMain.stop();
+                return HttpConstructor.getStop();
+            default:
+                if(header.get("Range") == null || true){
+                    return HttpConstructor.getFile(header.get("url"));
+                }else if(header.get("Range") != null && header.get("Range").equals("bytes=0-")){
                     //confirm support, return content range
                     return HttpConstructor.getContentRange();
                 }else{
@@ -62,17 +70,6 @@ public class HttpResponse {
                     int end = Integer.parseInt(m.group());
                     return HttpConstructor.getMP4Partial(start,end);
                 }
-            case "/image":
-                return HttpConstructor.getJpg();
-            case "/favicon.ico":
-                return HttpConstructor.getIcon();
-            case "/profile":
-                return HttpConstructor.getUser(curUser);
-            case "/stop":
-                ServerMain.stop();
-                return HttpConstructor.getStop();
-            default:
-                return HttpConstructor.getFile(requestUrl);
         }
     }
 

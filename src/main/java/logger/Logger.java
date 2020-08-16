@@ -16,6 +16,7 @@ public class Logger {
     private static  ArrayList<String > serverStat = new ArrayList<>();
     private static int requestCount = 0;
     private static int successCount = 0;
+    public static long debugMode = 0;
 
     public Logger(Object obj){
         this.curClass=obj.getClass().getSimpleName();
@@ -23,7 +24,8 @@ public class Logger {
 
     public synchronized void log(String logEntry){
         String time = new Timestamp(System.currentTimeMillis()).toString();
-        System.out.println("["+time+"]\t"+curClass+"\t-"+logEntry);
+        if(debugMode!=0)
+            System.out.println("["+time+"]\t"+curClass+"\t-"+logEntry);
         logSet.add("["+time+"]\t"+curClass+"\t-"+logEntry);
     }
 

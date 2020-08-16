@@ -39,7 +39,8 @@ public class HttpConstructor {
         return "HTTP/1.1 200 OK\r\n" +
                 format("Date: %s\r\n", getServerTime()) +
                 format("Server: %s\r\n", jb.get("serverName")) +
-                AccessControl;
+                AccessControl +
+                "Accept-Ranges: bytes\r\n";
     }
 
     public static String getPartialFormat(){

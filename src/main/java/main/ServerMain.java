@@ -16,8 +16,8 @@ public class ServerMain {
     static HttpHandler httpHandler;
     static MonitoringThread monitoringThread;
 
-    String version;
-    String serverName;
+    public static String version;
+    public static String serverName;
     long port;
     String address;
 

@@ -34,7 +34,7 @@ public class HttpHandler extends Thread{
     HttpThread[] threadPool;
 
     String address;
-    int port;
+    long port;
     static boolean isLive = false;
 
     int counter;
@@ -47,7 +47,7 @@ public class HttpHandler extends Thread{
         HttpHandler.isLive = isLive;
     }
 
-    public HttpHandler(String address, int port){
+    public HttpHandler(String address, long port){
         this.address = address;
         this.port = port;
         counter = 0;
@@ -55,7 +55,7 @@ public class HttpHandler extends Thread{
         logger.log("Creating HTTP hander "+
                 String.format("Address: %s | ", address)+
                 String.format("Port: %d", port));
-        Address = new InetSocketAddress(address,port);
+        Address = new InetSocketAddress(address, Math.toIntExact(port));
         try{
             serverSocket = getServerSocket(Address);
             serverSocket.setSoTimeout(2000);
@@ -100,11 +100,11 @@ public class HttpHandler extends Thread{
             e.printStackTrace();
         }
 
-        int https = (int)jb.get("https");
-        if(https == 0){
+
+        if((long)jb.get("https") == 0){
             logger.log("Get HTTP ServerSocket");
             logger.log("HTTP success");
-            return new ServerSocket((int)jb.get("port"));
+            return new ServerSocket(Math.toIntExact((long) jb.get("port")));
         }
 
         logger.log("Get HTTPs ServerSocket");

@@ -57,17 +57,20 @@ public class HttpResponse {
             default:
                 if(header.get("Range") == null || true){
                     return HttpConstructor.getFile(header.get("url"));
-                }else if(header.get("Range") != null && header.get("Range").equals("bytes=0-")){
-                    //confirm support, return content range
-                    return HttpConstructor.getContentRange();
                 }else{
                     //request with content range
                     Pattern p = Pattern.compile("\\d+");
                     Matcher m = p.matcher(header.get("Range"));
-                    m.find();
-                    int start = Integer.parseInt(m.group());
-                    m.find();
-                    int end = Integer.parseInt(m.group());
+                    if(m.find()){
+                        int start = Integer.parseInt(m.group());
+                    } else{
+                        return HttpConstructor.get416();
+                    }
+                    if(m.find()) {
+                        int end = Integer.parseInt(m.group());
+                    }else{
+                        int end = null;
+                    }
                     return HttpConstructor.getMP4Partial(start,end);
                 }
         }

@@ -167,22 +167,6 @@ public class HttpConstructor {
         return new Http(head, body);
     }
 
-    public static Http getContentRange(){
-        File myFile = new File("./test_video.mp4");
-        int contentLength = (int)myFile.length();
-        byte[] body = null;
-
-        String head = getPartialFormat()+
-                format("Content-Length: %d\r\n", 0) +
-                format("Content-Type: %s\r\n", "video/mpeg4") +
-                "Content-Disposition: inline; name=\"test_video\"; " +
-                format("filename=\"test_video.mp4\"\r\n") +
-                format("Content-Range: bytes 0-%d\r\n",contentLength)+
-                // An empty line marks the end of the response's header
-                "\r\n";
-        return new Http(head, body);
-    }
-
     public static Http getMP4Partial(int start, int end){
         FileInputStream fis = null;
         BufferedInputStream bis = null;

@@ -84,7 +84,8 @@ public class HttpResponse {
                 String bodyString = request.get("body");
                 JSONParser parser = new JSONParser();
                 JSONObject body = (JSONObject) parser.parse(bodyString);
-                curUser = new User(body.get("firstname").toString(),body.get("lastName").toString(),body.get("nickName").toString(), (String) body.get("userName"), body.get("eMail").toString(), UUID.fromString(body.get("uuid").toString()));
+                curUser = User.createUser(body.get("firstname").toString(),body.get("lastName").toString(),
+                        body.get("nickName").toString(), (String) body.get("userName"), body.get("eMail").toString());
             } catch (ParseException e) {
                 e.printStackTrace();
             }

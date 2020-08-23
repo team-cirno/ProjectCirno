@@ -49,8 +49,6 @@ public class HttpResponse {
                 return HttpConstructor.getJpg();
             case "/favicon.ico":
                 return HttpConstructor.getIcon();
-            case "/profile":
-                return HttpConstructor.getUser(curUser);
             case "/stop":
                 ServerMain.stop();
                 return HttpConstructor.getStop();
@@ -78,19 +76,28 @@ public class HttpResponse {
         }
     }
 
-    public static Http poseResponse(HashMap<String, String> request) {
-        if (request.get("url").equals("/createUser")) {
-            try {
-                String bodyString = request.get("body");
-                JSONParser parser = new JSONParser();
-                JSONObject body = (JSONObject) parser.parse(bodyString);
+    public static Http poseResponse(HashMap<String, String> header) {
+        String bodyString = header.get("body");
+        JSONParser parser = new JSONParser();
+        JSONObject body = null;
+        try {
+            body = (JSONObject) parser.parse(bodyString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        String requestUrl = header.get("url");
+        switch (requestUrl){
+            case "/users/validate":
+            if(!body.get("pass").equals("pass"))
+                return HttpConstructor.getDefault();
+            return HttpConstructor.getUser(header.get("name"));
+            case "/createUser":
                 curUser = User.createUser(body.get("firstname").toString(),body.get("lastName").toString(),
                         body.get("nickName").toString(), (String) body.get("userName"), body.get("eMail").toString());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            return HttpConstructor.getDefault();
+                return HttpConstructor.getDefault();
+            default:
+                return HttpConstructor.getDefault();
         }
-        return HttpConstructor.getDefault();
     }
 }

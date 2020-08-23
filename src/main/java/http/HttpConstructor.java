@@ -2,6 +2,7 @@ package http;
 
 
 import logger.Logger;
+import object.user.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -281,13 +282,16 @@ public class HttpConstructor {
         return new Http(head,body);
     }
 
-    public static Http getUser(object.user.User user){
+    public static Http getUser(String user){
+
+        User tmp = User.getUser(user);
+
         logger.log("State build http request");
-        logger.log(user.getFirstName());
-        logger.log(user.getLastName());
+        logger.log(tmp.getFirstName());
+        logger.log(tmp.getLastName());
         JSONObject bodyJson = new JSONObject();
-        bodyJson.put("firstName",user.getFirstName());
-        bodyJson.put("lastName",user.getLastName());
+        bodyJson.put("firstName",tmp.getFirstName());
+        bodyJson.put("lastName",tmp.getLastName());
 
         byte[] body = bodyJson.toString().getBytes();
         int contentLength = body.length;

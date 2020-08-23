@@ -117,14 +117,19 @@ public class HttpThread extends Thread {
                 line = reader.readLine();
 
             }
+            logger.log("=>"+line);
+
             if(request.get("method").equals("GET"))
                 return request;
             line = reader.readLine();
             String body = "";
             while (!line.isEmpty()) {
+                logger.log("=>"+line);
                 body += line.trim().replace(" ","");
                 line = reader.readLine();
             }
+            logger.log("=>"+line);
+
             request.put("body",body);
 
         } catch (IOException e) {

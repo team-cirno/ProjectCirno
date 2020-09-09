@@ -45,7 +45,7 @@ public class HttpResponse {
             case "/":
                 return HttpConstructor.getFile("/index.html");
             case "/auth":
-                return HttpConstructor.getAuth();
+                return HttpConstructor.getAuthRequest();
             case "/image":
                 return HttpConstructor.getJpg();
             case "/favicon.ico":

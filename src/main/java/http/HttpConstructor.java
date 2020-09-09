@@ -309,7 +309,7 @@ public class HttpConstructor {
     }
 
 
-    public static Http getAuthRequest(String user){
+    public static Http getAuthRequest(){
         logger.log("State build http request");
 
         JSONParser parser = new JSONParser();

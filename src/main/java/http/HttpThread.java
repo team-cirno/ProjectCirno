@@ -63,8 +63,11 @@ public class HttpThread extends Thread {
                 }
                 writer.write(res.getHead().getBytes(), 0, res.getHead().getBytes().length);
                 writer.flush();
-                writer.write(res.getPayload(), 0, res.getPayload().length);
-                writer.flush();
+                if(res.getPayload() != null){
+                    writer.write(res.getPayload(), 0, res.getPayload().length);
+                    writer.flush();
+                }
+
                 if(request.get("Connection") == null || request.get("Connection").equals("close"))
                     this.closed = true;
                 //break;

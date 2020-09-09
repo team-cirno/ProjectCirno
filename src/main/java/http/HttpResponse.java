@@ -1,5 +1,6 @@
 package http;
 
+import database.DataBaseHandler;
 import main.ServerMain;
 import object.user.User;
 import org.json.simple.JSONObject;
@@ -93,7 +94,7 @@ public class HttpResponse {
                 return HttpConstructor.getDefault();
             return HttpConstructor.getUser(header.get("name"));
             case "/createUser":
-                curUser = User.createUser(body.get("firstname").toString(),body.get("lastName").toString(),
+                curUser = DataBaseHandler.createUser(body.get("firstname").toString(),body.get("lastName").toString(),
                         body.get("nickName").toString(), (String) body.get("userName"), body.get("eMail").toString());
                 return HttpConstructor.getDefault();
             default:

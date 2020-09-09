@@ -29,10 +29,10 @@ public class DBtest {
     }
 
     public static void main(String[] args) {
-        User tmp = User.createUser("xiao", "admin",
+        User tmp = DataBaseHandler.createUser("xiao", "admin",
                 "pass", "admin",
                 "pass");
 
-        System.out.print(User.getUser("admin"));
+        System.out.print(DataBaseHandler.getUser("admin"));
     }
 }

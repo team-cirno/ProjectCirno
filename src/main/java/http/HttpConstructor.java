@@ -1,11 +1,13 @@
 package http;
 
 
+import database.DataBaseHandler;
 import logger.Logger;
 import object.user.User;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -284,7 +286,7 @@ public class HttpConstructor {
 
     public static Http getUser(String user){
 
-        User tmp = User.getUser(user);
+        User tmp = DataBaseHandler.getUser(user);
 
         logger.log("State build http request");
         logger.log(tmp.getFirstName());
@@ -304,6 +306,30 @@ public class HttpConstructor {
                 "\r\n";
         logger.log("Finish build http request");
         return new Http(head,body);
+    }
+
+
+    public static Http getAuthRequest(String user){
+        logger.log("State build http request");
+
+        JSONParser parser = new JSONParser();
+        JSONObject jb = null;
+        try{
+            Object obj = parser.parse(new FileReader("./server.json"));
+            jb = (JSONObject)obj;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        String tmp = "HTTP/1.1 401 Unauthorized\r\n" +
+                format("Date: %s\r\n", getServerTime()) +
+                format("Server: %s\r\n", jb.get("serverName")) +
+                AccessControl;
+        String head = tmp +
+                "WWW-Authenticate: Basic realm=\"Access to the staging site\", charset=\"UTF-8\"\r\n"+
+                // An empty line marks the end of the response's header
+                "\r\n";
+        logger.log("Finish build http request");
+        return new Http(head,null);
     }
 
 //    public static Http unauthorized(){

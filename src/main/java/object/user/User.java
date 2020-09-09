@@ -39,50 +39,6 @@ public class User {
 
     }
 
-    public static User createUser(String firstName, String lastName, String nickName, String userName, String eMail){
-        Document document1 = new Document("firstName",firstName)
-                .append("lastName", lastName)
-                .append("nickName",nickName)
-                .append("userName", userName)
-                .append("uuid",UUID.randomUUID().toString())
-                .append("eMail", eMail);
-        List<Document> list = new ArrayList<Document>();
-        list.add(document1);
-        MongoCollection<Document> collection=DBtest.DBInit();
-        collection.insertMany(list);
-        return new User(firstName, lastName, nickName, userName, eMail, UUID.randomUUID().toString());
-    }
-
-    public  void addToDB(){
-        Document document1 = new Document("firstName",firstName)
-                .append("lastName", lastName)
-                .append("nickName",nickName)
-                .append("userName", userName)
-                .append("uuid",UUID.randomUUID())
-                .append("eMail", eMail);
-        List<Document> list = new ArrayList<Document>();
-        list.add(document1);
-        MongoCollection<Document> collection=DBtest.DBInit();
-        collection.insertMany(list);
-
-    }
-
-    public static User getUser(String name){
-        MongoCollection<Document> collection=DBtest.DBInit();
-        BasicDBObject Query=new BasicDBObject();
-        Query.put("userName",name);
-        FindIterable<Document> findIterable = collection.find(Query);
-        MongoCursor<Document> mongoCursor = findIterable.iterator();
-        Document studentDocument = mongoCursor.tryNext();
-        System.out.println(studentDocument);
-        return new User(studentDocument.getString("firstName"),
-                studentDocument.getString("firstName"),
-                studentDocument.getString("firstName"),
-                studentDocument.getString("userName"),
-                studentDocument.getString("eMail"),
-                studentDocument.getString("uuid"));
-    }
-
     public  String getFirstName() {
         return this.firstName= firstName;
     }

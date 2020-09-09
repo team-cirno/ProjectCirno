@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mongodb.client.model.Filters;
+import logger.Logger;
 import org.bson.Document;
 import com.mongodb.client.MongoCursor;
 import java.util.UUID;
@@ -43,7 +44,7 @@ public class User {
                 .append("lastName", lastName)
                 .append("nickName",nickName)
                 .append("userName", userName)
-                .append("uuid",UUID.randomUUID())
+                .append("uuid",UUID.randomUUID().toString())
                 .append("eMail", eMail);
         List<Document> list = new ArrayList<Document>();
         list.add(document1);
@@ -72,7 +73,8 @@ public class User {
         Query.put("userName",name);
         FindIterable<Document> findIterable = collection.find(Query);
         MongoCursor<Document> mongoCursor = findIterable.iterator();
-        Document studentDocument = mongoCursor.next();
+        Document studentDocument = mongoCursor.tryNext();
+        System.out.println(studentDocument);
         return new User(studentDocument.getString("firstName"),
                 studentDocument.getString("firstName"),
                 studentDocument.getString("firstName"),
